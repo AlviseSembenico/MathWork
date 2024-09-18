@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{amsfonts} % For other mathematical fonts if needed
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{wasysym}
+\usepackage{bbm} % Use bbm for blackboard bold indicator function
+\usepackage{xcolor}
+
+\newcommand{\comment}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+
+\title{Portfolio Theory\\
+Homework 1}
+\author{
+  Sembenico, Alvise\\
+  \texttt{12380288} \\  
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{1.1}
+As in this exercise we are looking at several stochastic processes and have to classify as predictable or just adapted, we will first show that the indicator function is adapted/predictable if the argument is adapted/predictable.
+This is true almost just by definition as the preimage is the following.
+
+\begin{equation}
+  \mathbbm{1}_{A}^{-1}(x) = \begin{cases}
+    A \text{ if }x=1                  \\
+    \Omega \setminus A \text{ if }x=0 \\
+  \end{cases}
+\end{equation}
+Where \(A \in  \mathcal{F}\) so does \(\Omega \setminus A = A^C\).
+With this in mind, we can proceed on considering the following processes.
+\begin{itemize}
+  \item $\varphi_t = \mathbbm{1}_{\{ S_t^{(1)} > S_{t-1}^{(1)} \}};$
+        \subitem \(\phi _t\) is merely adapted as \(S_t\) is just adapted.
+
+  \item $\varphi_1 = 1$ and $\varphi_t = \mathbbm{1}_{\{ S_{t-1}^{(1)} > S_{t-2}^{(1)} \}}$ for $t \geq 2$;
+        \subitem \(\phi_t\) is predictable as both process are \(\mathcal{F}_t\) measurable, thus, \(\phi _{t-1}\) is \(\mathcal{F}_t\) measurable.
+
+  \item $\varphi_t = \mathbbm{1}_A \cdot \mathbbm{1}_{\{ t > t_0 \}},$ where $t_0 \in \{ 0, \dots, T \}$ and $A \in \mathcal{F}_{t_0};$
+        \subitem We can see that \( \mathbbm{1}_A\) and \( \mathbbm{1}_{t>t_0}\) are both deterministic functions, moreover, given that \(A \in  \mathcal{F}_0\), we have that for every \(t\geq 1\), \(\phi _t\) is \(F_{t+1}\) measurable, therefore the process is predictable.
+
+  \item $\varphi_t = \mathbbm{1}_{\{ S_t^{(1)} > S_0^{(1)} \}};$
+        \subitem Again by looking at the argument of the argument of the indicator function, we see that \(S_t\) is merely adapted. It follows that \(\phi _t \) is also just adapted\dots
+
+  \item $\varphi_1 = 1$ and $\varphi_t = 2 \varphi_{t-1} \mathbbm{1}_{\{ S_{t-1}^{(1)} < S_0^{(1)} \}}$ for $t \geq 2.$
+        \subitem We can see that the argument of the indicator function is again predictable. We have to be careful about the \(\phi _{t-1}\) component. However, using an induction argument, we can see that each \(\phi _{t-1}\) is \(\mathcal{F}_{t}\) measurable, making it predictable. It follows that \(\phi _t \) is predictable as well.
+\end{itemize}
+
+
+\section{}
+
+
+\end{document}
