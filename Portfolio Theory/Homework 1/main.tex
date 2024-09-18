@@ -96,5 +96,16 @@ With this in mind, we can proceed on considering the following processes.
   For every \(t=0,\dots ,1\).
 \end{proof}
 
+\section{1.3}
+\begin{proof}
+  \begin{align*}
+    \Delta W_t(\phi )                                         & = \phi _t^T \Delta X_t      \\
+    \iff               \phi _t ^T S_t - \phi _{t-1}^T S_{t-1} & = \phi_t S_t - \phi S_{t-1} \\
+    \iff \phi _{t-1}^T S_{t-1}                                & = \phi _t^T S_{t-1}         \\
+    \iff  \phi _t^T S_t                                       & = \phi _{t+1}^{T}S_t
+  \end{align*}
+  where the last statement holds true as the previous ones are true for every \(t =0,\dots ,T\).
+\end{proof}
+
 
 \end{document}
