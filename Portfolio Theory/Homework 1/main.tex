@@ -107,5 +107,51 @@ With this in mind, we can proceed on considering the following processes.
   where the last statement holds true as the previous ones are true for every \(t =0,\dots ,T\).
 \end{proof}
 
+\section{1.4}
+Let's start by noting that the reciprocal absolute continuity of \(\mathcal{P}, \mathbb{Q}\) implies that the Radon Nikodym is well defined.
+Moreover, we can define
+\begin{equation}
+  Z_\infty := \frac{dQ}{dP} \bigg|_{\mathcal{F}_\infty}.
+\end{equation}
+Furthermore, we define
+\begin{equation}
+  Z_t = \mathbb{E} \left[ Z_\infty  |\mathcal{F}_t \right].
+\end{equation}
+We now show that \(Z_t\) is indeed a martingale. We know that it's squared integrable, thus \(\mathbb{E} \left[ |Z_t| \right] <\infty  \forall t>0 \). So we focus on the martingality property.
+For \(s\leq t\);
+\begin{align*}
+  \mathbb{E} \left[ Z_t|\mathcal{F}_s \right] & = \mathbb{E} \left[ \mathbb{E} \left[ Z_\infty |F_t \right] |\mathcal{F}_s \right] \\
+                                              & = \mathbb{E} \left[ Z_\infty |\mathcal{F}_{s \wedge t} \right]                     \\
+                                              & = Z_s
+\end{align*}
+
+Let's now show that
+\begin{equation}
+  Z_t = \frac{dQ}{dP}\bigg|_{\mathcal{F}_t}
+\end{equation}
+Take \(A \in  F_t\), then
+\begin{equation}
+  Q(A) = \mathbb{E}_P \left[ \mathbbm{1}_A \frac{dQ}{dP}\bigg|_{\mathcal{F}_t} \right]
+\end{equation}
+But also, for \(A \in  \mathcal{F}_t \subset \mathcal{F}_\infty  \)
+\begin{align}
+  Q(A) & = \mathbb{E}_P \left[ \mathbbm{1}_A Z_\infty  \right]                                           \\
+       & = \mathbb{E}_P \left[ \mathbb{E}_P \left[ \mathbbm{1}_A Z_\infty |\mathcal{F}_t \right] \right] \\
+       & = \mathbb{E}_P \left[ \mathbbm{1}_A  Z_t\right]
+\end{align}
+From both equalities we conclude that
+\begin{equation}
+  Z_t = \frac{dQ}{dP}\bigg|_{\mathcal{F}_t}
+\end{equation}
+% Let's set
+% \begin{equation}
+%   \hat{Z} \coloneqq \frac{dQ}{dP}\bigg|_{\mathcal{F}_t}
+% \end{equation}
+% Then, by Lemma 9.2 of Stochastic integration
+% \begin{equation}
+%   \hat{Z}= \frac{\mathbb{E}_P \left[ X Z_\infty |\mathcal{F}_t \right]}{\mathbb{E}_{Q}  \left[ X|\mathcal{F}_t \right]} = Z_t \frac{\mathbb{E}_p \left[ X|\mathcal{F}_t \right]}{\mathbb{E}_Q \left[X|\mathcal{F}_t  \right]}
+% \end{equation}
+
+
 
 \end{document}
