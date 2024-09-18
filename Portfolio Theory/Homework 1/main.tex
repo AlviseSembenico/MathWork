@@ -59,7 +59,42 @@ With this in mind, we can proceed on considering the following processes.
 \end{itemize}
 
 
-\section{}
+\section{1.2}
+\begin{proof}
+  We will prove the statement with a series of double direction implications.
+
+
+  A strategy is self financing if and only if
+  \[
+    W_t(\phi )= W_0(\phi ) + G_t(\phi ) =  W_0(\phi ) + (\phi \cdot  X)_t
+  \]
+  For every \(t\).
+  It follows that
+  \begin{align*}
+    \phi _t^T S_t                                       & =\phi _0 ^TS_0 + \sum _i^t \phi_{i}^T  (S_i-S_{i-1}) \\
+    \sum_{i}^t \phi _i ^T S_{i} - \phi _{i-1}^T S_{i-1} & = \sum _i^t\phi_i^T (S_i-S_{i-1})                    \\
+    \sum_{i}^t(\phi _i^T + \phi_{i-1}^T )S_{i-1}        & =0
+  \end{align*}
+  For every \(t=0,\dots ,T\). As it has to be true for all the \(t\), by induction, we deduce that
+  \[
+    (\phi _t^T - \phi _{t-t}^T) S_{t-1}= 0.
+  \]
+  for all \(t=1,\dots T\). In other words, given that it's true for \(t=1\)
+  and by the inductive step
+  \begin{align*}
+    \sum_{i}^2(\phi _i^T + \phi_{i-1}^T )S_{i-1} & =  (\phi _1^T + \phi_{0}^T )S_{0}+  (\phi _2^T + \phi_{1}^T )S_{1} \\
+                                                 & = (\phi _2^T + \phi_{1}^T )S_{1} =0.
+  \end{align*}
+  By diving both sides of the equation, we get that
+  \begin{equation}
+    (\phi _t^T - \phi _{t-t}^T) \widetilde{S}_{t-1}= 0.
+  \end{equation}
+  Given that this is true for every \(t\), again by induction argument, we conclude that
+  \begin{equation}
+    \widetilde{W}_t(\phi ) = \widetilde{W}_0(\phi )+(\phi \cdot \widetilde{X} )_t.
+  \end{equation}
+  For every \(t=0,\dots ,1\).
+\end{proof}
 
 
 \end{document}
