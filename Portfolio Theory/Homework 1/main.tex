@@ -206,4 +206,79 @@ Let's define \(R_{0}\sim  N(0,1) \), next we define
 \end{equation}
 It's obvious that the returns \(R_t\) are not independent, as well as that \(\mathbb{E} \left[ R_{t+1}| \mathcal{F}_t  \right]=0\) as requested by the previous point for \(S_t\) to be a Martingale.
 
+\section{1.6}
+Given the process
+\begin{equation}
+  X_t^{(1)} := X_0^{(1)} \prod_{i=1}^{t} e^{\sigma_i Z_i + m_i}, \quad t = 0, \dots, T.
+\end{equation}
+We want to construct a measure \(\mathbb{Q}\) such that \(X_t\) is still log-normally distributed under \(\mathbb{Q}\).
+Define
+\begin{equation}
+  Z_t \coloneqq \frac{d\mathbb{Q}}{d\mathcal{P}}\bigg|_{\mathcal{F}_t}
+\end{equation}
+Using equation 9.2 from Stochastic integration, we know that
+\begin{equation}
+  \mathbb{E}_\mathcal{Q} \left[ X_t|\mathcal{F}_{t-1}  \right] = \frac{\mathbb{E} \left[ X_t Z | \mathcal{F}_{t-1}  \right]}{\mathbb{E} \left[ Z|\mathcal{F}_{t-1}  \right]}
+\end{equation}
+For \(t=1\), we get
+\begin{equation}
+  \mathbb{E}_\mathcal{Q} \left[ X_1|\mathcal{F}_{0}  \right] = \mathbb{E} \left[ X_1 \right] = X_0 \frac{\mathbb{E} \left[ e^{\sigma _1 \widetilde{Z} _1+m_1} Z_1  \right]}{\mathbb{E} \left[ Z_1 \right]}
+\end{equation}
+Since we want \(X_1\) to be a Martingale, it must hold that
+\begin{equation}
+  \frac{\mathbb{E} \left[ e^{\sigma _1 \widetilde{Z} _1+m_1} Z_1  \right]}{\mathbb{E} \left[ Z_1 \right]} = 1
+\end{equation}
+Assume now that \(Z_1 = e^{\overline{\sigma }_1 \widetilde{Z}_1 + \overline{m}_1  }\).
+Then, by plugging it in, we get the following equations
+\begin{equation}
+  \exp \left( {\overline{m_1} + \frac{\overline{\sigma}_1^2}{2}  }  \right)= 1
+\end{equation}
+and
+\begin{equation}
+  \exp\left( {\overline{m_1} +m_1 + \frac{(\overline{\sigma}_1 + \sigma _1)^2}{2}  } \right) = 1
+\end{equation}
+
+Which are solved by
+\begin{equation}
+  \overline{\sigma _1} = -\frac{2m_1 +\sigma _1^2}{\sigma _1} \quad\quad \overline{m} _1 =\left(  \frac{2m_{1}+\sigma _1^2 }{ \sigma _1}  \right) \frac{1}{2}.
+\end{equation}
+Which characterizes the \(Z_1\) distribution.
+
+For \(t=2\) we get
+\begin{equation}
+  \mathbb{E} \left[ X_2 | \mathcal{F}_1 \right] = \frac{\mathbb{E} \left[ X_2 Z_2 |\mathcal{F}_1 \right]}{\mathbb{E} \left[ Z_2|\mathcal{F}_1 \right]} = \frac{X_1 \mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_2 |\mathcal{F}_1 \right]}{\mathbb{E} \left[ Z_2|\mathcal{F}_1 \right]}.
+\end{equation}
+Which can be further simplified by
+\begin{equation}
+  X_1 \frac{\mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_2 |\mathcal{F}_1 \right]}{\mathbb{E} \left[ Z_2|\mathcal{F}_1 \right]} = X_{1}  \frac{\mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_2 |\mathcal{F}_1 \right]}{Z_1}
+\end{equation}
+So it must hold that
+\begin{equation}
+  \mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_2 |\mathcal{F}_1 \right] = Z_1
+\end{equation}
+As well as \(\mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_2 |\mathcal{F}_1 \right]\) be log-normally distributed.
+A sensitive guess it that
+\begin{equation}
+  Z_2 = Z_1 Y_2.
+\end{equation}
+Plugging this in we obtain the following.
+
+\begin{equation}
+  \mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_2 |\mathcal{F}_1 \right] = \mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Z_1 Y_2 |\mathcal{F}_1 \right] = Z_1\mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Y_2 |\mathcal{F}_1 \right].
+\end{equation}
+Again, we obtain the condition that \(\mathbb{E} \left[ e^{\sigma _2 \widetilde{Z}_2 +m_2} Y_2 |\mathcal{F}_1 \right] = 1\).
+This is the same as before, just with different indices.
+We thus obtain
+
+\begin{equation}
+  \overline{\sigma _2} = -\frac{2m_2 +\sigma _2^2}{\sigma _2} \quad\quad \overline{m} _2 =\left(  \frac{2m_{2}+\sigma _2^2 }{ \sigma _2}  \right) \frac{1}{2}.
+\end{equation}
+By induction, we obtain that
+\begin{equation}
+  Z_t = \prod_{i}^t Y_t.
+\end{equation}
+Where \(Y_t\) is log normal distributed with the coefficients described above.
+
+
+
 \end{document}
