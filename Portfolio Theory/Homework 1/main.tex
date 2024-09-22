@@ -152,6 +152,58 @@ From both equalities we conclude that
 %   \hat{Z}= \frac{\mathbb{E}_P \left[ X Z_\infty |\mathcal{F}_t \right]}{\mathbb{E}_{Q}  \left[ X|\mathcal{F}_t \right]} = Z_t \frac{\mathbb{E}_p \left[ X|\mathcal{F}_t \right]}{\mathbb{E}_Q \left[X|\mathcal{F}_t  \right]}
 % \end{equation}
 
+\section{1.5}
+\subsection{a}
+Let's prove that
+\begin{equation}
+  S_t = S_0 \prod_{k=1} ^t (1+R_k)
+\end{equation}
+is a Martingale when \(R_1,\dots ,R_T\) are independent and \(\mathbb{E} \left[ R_t \right]= 0 \).
 
+Let's start by proving the integrability, for any positive \(t\) we have
+\begin{align*}
+  \mathbb{E} \left[ |S_t| \right] & = \mathbb{E} \left[ S_t \right] \comment{stricly positive}                    \\
+                                  & = \mathbb{E} \left[ S_0 \prod_{k=1} ^t (1+R_k) \right]                        \\
+                                  & = S_0\mathbb{E} \left[  \prod_{k=1} ^t (1+R_k) \right] \comment{independence} \\
+                                  & = S_0 < \infty.
+\end{align*}
+We now prove the martingale property of the process \(S\).
+\begin{align*}
+  \mathbb{E} \left[ S_{t+1}| \mathcal{F}_t \right] & = \mathbb{E} \left[ S_0 \prod_{k=1}^{t+1}(1+R_k)| \mathcal{F}_t   \right]                         \\
+                                                   & =S_0 \mathbb{E} \left[ \prod_{k=1}^t (1+R_k) \cdot (1+R_{t+1} ) |\mathcal{F}_t\right]             \\
+                                                   & = S_0 \prod_{k=1} ^t (1+R_k) \mathbb{E} \left[ 1+R_{t+1} |\mathcal{F}_t  \right]                  \\
+                                                   & = S_0 \prod_{k=1} ^t (1+R_k)  \left( 1+ \mathbb{E} \left[ R_{t+1} | \mathcal{F}_t \right] \right) \\
+                                                   & = S_0 \prod_{k=1} ^t (1+R_k)  \left( 1+ \mathbb{E} \left[ R_{t+1} \right] \right)                 \\
+                                                   & = S_0 \prod_{k=1} ^t (1+R_k)                                                                      \\
+                                                   & = S_t.
+\end{align*}
+In the previous series of equivalences we used the measurability of \(S_{t-1}\) and independence of the \(R_t\) and the fact that \(\mathbb{E} \left[ R_t \right] = 0\).
+
+\subsection{b}
+Let's now derive the necessary and sufficient conditions for \(S_t\) to be a Martingale. Let's start by looking at the martingale property.
+
+\begin{align*}
+  \mathbb{E} \left[ S_{t+1} |\mathcal{F}_t \right] & = \mathbb{E} \left[ S_0 \prod_{k=1} ^{t+1}(1+R_k)|\mathcal{F}_t \right]          \\
+                                                   & = S_0 \mathbb{E} \left[ \prod_{k=1}^t (1+R_k) (1+R_{t+1}) |\mathcal{F}_t \right] \\
+                                                   & = S_0 \prod_{k=1}^t (1+R_k) \mathbb{E} \left[ 1+R_{t+1} |\mathcal{F}_t \right] .
+\end{align*}
+The above is equal to \(S_t\) if and only if \(\mathbb{E} \left[ 1+R_{t+1} |\mathcal{F}_t \right] = 1\) which is true if and only if \(\mathbb{E} \left[ R_{t+1}| \mathcal{F}_t \right] = 0\).
+Therefore, the necessary and sufficient condition is that
+\begin{equation}
+  \mathbb{E} \left[ R_{t+1}|\mathcal{F}_t \right] = 0
+\end{equation}
+So we conclude that \(R_t\) must be a Martingale with \(R_0 = 0\).
+
+
+\subsection{c}
+To define \(R_t\) such that \(S_t\) is a martingale but the returns are not independent we can define a process \(R_t\) such that is's a martingale with expectation 0 and dependent returns.
+Let's define \(R_{0}\sim  N(0,1) \), next we define
+\begin{equation}
+  R_t= \begin{dcases}
+    R_{t-1} ,  & \text{ with }  p=\frac{1}{2}; \\
+    -R_{t-1} , & \text{ with }  p=\frac{1}{2}; \\
+  \end{dcases}
+\end{equation}
+It's obvious that the returns \(R_t\) are not independent, as well as that \(\mathbb{E} \left[ R_{t+1}| \mathcal{F}_t  \right]=0\) as requested by the previous point for \(S_t\) to be a Martingale.
 
 \end{document}
