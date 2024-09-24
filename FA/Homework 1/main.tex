@@ -5,6 +5,7 @@
 % fonts
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -118,6 +119,43 @@ It follows that
 \end{equation}
 We conclude that \(A\) has at most countable number of non zero elements as countable union of finite sets.
 
+Let's now prove the \((\implies) \) direction.
+Given the previously proven statement, we can rewrite the net as countable sum and thus define a corresponding sequence \(x_n = \sum_{i=0}^n a_{i}  \) where w.log. we associated every non zero element \(a\)  of \(A\) to an index \(i\) so that \(a_i = a\).
+From standard analysis we obtain that every converging increasing sequence is bounded from above, i.e. there exists \(N \in  R\) so that \(x_n < N\) for every \(n\).
+It follows that for every finite \(F \subset I\)
+\begin{equation}
+    \sum_{a \in F} a \leq \sum_{i \in  \mathbb{N}}a_i \leq N.
+\end{equation}
+
+
+We now prove the opposite implication \((\impliedby)\). Assume that \(\sup \left\{ \sum_{a \in F} a : F \in \mathcal{F} \right\} = x_0\). We proceed now by contradiction, suppose that \(\sum_{a \in  A}a \to  x_0 +t \) for an arbitrary \(t>0\).
+
+
+Let's define now what does it mean for a net to be increasing. Given a set \(F_0\), it holds that for every \(F > F_0\) we have that \(\sum_{a\in  F}a \geq  \sum_{a \in  F_0}a  \).
+
+By the definition of net convergence for standard set inclusion as order, we obtain that the net \(\sum_{a\in  A}a \) is increasing.
+It follows that for every \(F\), \(\sum_{a \in  F} \leq  x_0 +t \). Moreover, since \(\sum_{a \in  A} a \to x_{0}+t  \), there exists and \(F_t\)  such that \(\forall F > F_t\) \(\| \sum_{a \in  F} a -x_{0}-t   \| < \frac{t}{2} \). It follows
+\begin{align*}
+    \| \sum_{a \in  F} a -x_0 -t  \| & \leq 0                                   \\
+    \| \sum_{a \in  F} a -x_0 -t  \| & =  \sum_{a \in  F} a -x_0 -t<\frac{t}{2} \\
+    \sum_{a \in  F}a > x_0 +\frac{t}{2}
+\end{align*}
+Which is a contradiction. As this holds for any arbitrary \(t\), \(\sum_{a\in A}a \leq x_0 \).
+
+
+Let's conclude the proof by showing that
+\begin{equation}
+    \sup \left\{ \sum_{a \in F} a : F \in \mathcal{F} \right\} = \sum_{a \in  A} a = x_0.
+\end{equation}
+Take an arbitrary \(x<x_0\). By contradiction, assume that \(\sup \left\{ \sum_{a \in F} a : F \in \mathcal{F} \right\} = x\).
+Again, by convergence of the net, there exists a \(F_0\) such that \(\forall F>F_0\) we have
+\begin{align*}
+    \| \sum_{a \in F}a -x_0  \| & <|x-x_0| \\
+    x_0 - \sum_{a \in  F}       & x_{0}-x  \\
+    \sum_{a \in  F}a            & >x
+\end{align*}
+Which is a contradiction. Combining it with the previous point we get the desired equality.
+\textcolor{red}{To double check that this is all we need.}
 
 
 
