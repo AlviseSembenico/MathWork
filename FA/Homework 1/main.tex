@@ -1,0 +1,290 @@
+\documentclass[a4paper,12pt]{article} % This defines the style of your paper
+
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+
+% fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mathtools}
+  
+% The following two packages - multirow and booktabs - are needed to create nice looking tables.
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+
+% The default setting of LaTeX is to indent new paragraphs. This is useful for articles. But not really nice for homework problem sets. The following command sets the indent to 0.
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+
+% Package to place figures where you want them.
+\usepackage{float}
+
+% The fancyhdr package let's us create nice headers.
+\usepackage{fancyhdr} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header (and Footer)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy} % With this command we can customize the header style.
+
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+\lhead{\footnotesize Functional Analysis}% \lhead puts text in the top left corner. \footnotesize sets our font to a smaller size.
+
+%\rhead works just like \lhead (you can also use \chead)
+\rhead{\footnotesize Alvise Sembenico}%, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
+
+% Similar commands work for the footer (\lfoot, \cfoot and \rfoot).
+% We want to put our page number in the center.
+\cfoot{\footnotesize \thepage} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+\newcommand{\comment}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{center} % Everything within the center environment is centered.
+    {\Large \bf Homework 1}
+\end{center}
+
+\vspace{0.4cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE HOMEWORK
+% Can be written right here or in the dedicated files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onehalfspacing
+\section{Exercise 1}
+\subsection{}
+Let's define \(x_0\) as the limit of the net
+\begin{equation}
+    \sum_{a \in  A}a \to x_0.
+\end{equation}
+Since it converges, it means tha there exist a set \(F_0 \subset A\) such that for all \(F > F_0\) the following holds
+\begin{equation}
+    \| \sum_{a \in  F}a - x_0  \| < \epsilon
+\end{equation}
+for any \(\epsilon >0\). Since \(\epsilon \) is arbitrary, we can choose \(F^{\prime} _0> F_0\) such that for all \(F > F_0^{\prime} \)
+
+\begin{equation}
+    \| \sum_{a \in  F}a - x_0  \| < \frac{\epsilon}{|\alpha| }.
+\end{equation}
+Then, by properties of the norm we obtain
+\begin{align*}
+    \vert \alpha \vert \| \sum_{a \in  F}a - x_0  \| & < \frac{\epsilon}{|\alpha| }\alpha = \epsilon \\
+    \| \alpha \sum_{a \in  F}a - \alpha x_0  \|      & < \epsilon                                    \\
+    \|  \sum_{a \in  F}\alpha a - \alpha x_0  \|     & < \epsilon.
+\end{align*}
+Where in the last step we used the fact that \(F\) is finite.
+This proves that \(\alpha \sum_{a \in  A} a\) converges to \(\alpha x_0 = \alpha \sum_{a \in  A} a \).
+
+\subsection{}
+The hypothesis that \(\sum_{a \in  A}a  \) and \(\sum_{b \in  B}b  \) implies that there exists an \(F_0^a\) and \(F_0^b\) such that for every \(F^a>F_0^a\) and \(F^b>F_0^b\) the following holds
+\begin{equation}
+    \| \sum_{a \in  F^a}a - \sum_{a \in  A}a   \| < \frac{\epsilon}{2} \quad \quad \| \sum_{b \in  F^b}b - \sum_{b \in  B}b   \|< \frac{\epsilon}{2}.
+\end{equation}
+Denote \(F_0 = F_0^a \cup F_0^b\), it follows that for every \(F > F_0\)
+\begin{align*}
+    \| \sum_{x \in  F}x - \sum_{a\in A}a - \sum_{b \in  B }b    \| & = \| \sum_{x \in  F \cap A} + \sum_{x \in F \cap B}x - \sum_{a \in  A}a - \sum_{b \in  B}b     \|                                                             \\
+                                                                   & \leq \| \sum_{x \in  F \cap A}x - \sum_{a \in  A}a   \|+\| \sum_{x \in F \cap B}x - \sum_{b \in  B }b \|< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+\end{align*}
+Because \(\epsilon\) was arbitrary, we conclude that \(\sum_{x \in A \cup B}\to \sum_{a \in  A} a + \sum_{b \in  B}b   \).
+
+\subsection{}
+
+Let's star by proving that any converging net of positive numbers has at most a countable number of non zero elements.
+
+Say that the net converges to \(M\), i.e. \(\sum_{a \in  A} a = M <\infty  \) where for every \(a \in A, a>0\). Consider now the sets \(S_n = \{ a \in  A | a> \frac{1}{n} \} \), then
+\begin{align*}
+    M \geq \sum_{a \in  S_n}a \geq  \sum_{a \in  S_n}\frac{1}{n}= \frac{N}{n}. \\
+\end{align*}
+As \(M < \infty \)  so is \(N\) which is the cardinality of the set \(S_n\).
+It follows that
+\begin{equation}
+    \# \{ a \in  A | a>0 \}= \# S = \# \bigcup_{n=\mathbb{N}}^{\infty} S_n
+\end{equation}
+We conclude that \(A\) has at most countable number of non zero elements as countable union of finite sets.
+
+
+
+
+% \section{Exercise 2}
+% \subsection{}
+% Using theorem I.4.13, we can write \(x\) as sum of dot product with the basis elements of \(H\), namely.
+
+% \begin{align*}
+%     x     & = \sum_{e in \mathcal{E}}\langle x,e \rangle e                                                                                           \\
+%           & = \sum_{e \in \mathcal{E}\setminus F  }\langle x,e \rangle  e+ \sum_{e \in F} \langle x,e \rangle e                                      \\
+%     P_F x & = P_F \sum_{e \in \mathcal{E}\setminus F  }\langle x,e \rangle  e+ P_F \sum_{e \in F} \langle x,e \rangle e \comment{Linearity of $P_F$} \\
+%           & = P_F \sum_{e \in F} \langle x,e \rangle e \comment{First property of theorem 2.7 point d}
+% \end{align*}
+
+% Now we have to prove that
+% \[
+%     P_F x = \sum_{e \in F} \langle x,e \rangle e
+% \]
+% Without loss of generality, we can add a generic \(\widetilde{x} \) to the result.
+% \begin{align*}
+%     P_F x & = \sum_{e \in F} \langle x,e \rangle e  + \widetilde{x}                                               \\
+%     P_F x & =   P_F \sum_{e \in F} \langle x,e \rangle e + P_F \widetilde{x} \comment{using propery c of th. 2.7} \\
+%           & =  \sum_{e \in F} \langle x,e \rangle e  + \widetilde{x} + P_F \widetilde{x}
+% \end{align*}
+% Which means that \(P_F \widetilde{x} = 0 \) which is possible if \(\widetilde{x} \) has no support in \(\operatorname{span} \bigvee F\). That means that \(\widetilde{x}\) must be 0.
+
+
+% \subsection{}
+
+% Let's start with proving that \(P_F P_G x = P_{F\cap G}\).
+% \[
+%     P_F P_G x= P_F \sum_{e \in  G}<x,e>e = \sum_{e \in  G}P_F <x,e>e = \sum_{_e \in  G \cap F}<x,e>e = P_{F \cap G}
+% \]
+% In this set of equalities we used 1. the linearity of the operator \(P_F\) and the orthogonality of the basis' elements \(e\).
+% The proof of \(P_G P_F x= P_{F \cap G}\) is analogous.
+
+% \subsection{}
+% I will prove \(P_{\bigcup_{i=1}^{\infty} F_i} x=\sum_{i=1}^{\infty} P_{F_i} x \) by induction.
+% \begin{align}
+%     P_{F_1 \cup F_2} & = \sum_{e \in  F_1 \cup F_2}<e,x>e                                                                      \\
+%                      & = \sum_{e \in F_1}<e,x>e  +\sum_{e \in  F_2}<e,x>e - \overbrace{\sum_{e \in  F_1 \cap F_2}<e,x,>e}^{=0} \\
+%                      & = P_{F_1}x+P_{F_2}x
+% \end{align}
+% This step is actually sufficient because for \(n=3\) we can rewrite it as \(F_1 \cap F_2 \cap F_3= F_{12} \cap F_3\) which I just proved to hold.
+
+% \subsection{}
+% By the theorem I.2.7 (Conway), any projection operator has norm
+% \[
+%     ||P_{F_k}x|| =\sup \left\{\left\|\left\langle x, e_k\right\rangle e_k\right\|:\|x\| \leq 1\right\}= 1
+% \]
+
+% And therefore
+% \[
+%     \lim_{n \to \infty} P_{F_n} \neq 0
+% \]
+% which implies that the series does not converge.
+% As an example we can take the standard projector \(P_{F_n} = <x,e_n>e_n\).
+
+% \section{Exercise 3}
+% \subsection{}
+% Let's first prove the existance of the inner product \(\langle x,y \rangle =\sum_{_i \in  \mathbb{I}}\langle x(i),y(i) \rangle  \)\dots
+
+% \[
+%     \begin{aligned}
+%         \sum_{i}\langle x(i),y(i) \rangle & \leq \sum_{i} |\langle x(i),y(i) \rangle |                                                         \\
+%                                           & \leq \sum_{i} ||x(i)|| \cdot||y(i)||                                                               \\
+%                                           & \leq \sum_{i \in  I,\ x(i)\geq y(i)}||x(i)||^2 + \sum_{i \in  I,\ x(i)<y(i)}||y(i)||^2 \leq \infty
+%     \end{aligned}
+% \]
+% Where for the second equality we used Cauchy-Schwarz inequality.
+
+% Let's now prove the completeness of the inner product.
+% Let's take a Cauchy sequence \(\{  y_m\}_{m>1} \coloneqq \{ (x_i^{(m)}) \}_{m>1} \). Consequently, it mush be that \({x_i^{(m)}}_{m>1}\) is a Cauchy sequence for every
+% \(i \in  I\)  .
+
+% Therefore, each \({x_i^{(m)}}_{m>1}\) must converge to a \(\overline{x_i} \) because it lives in the Hilbert space \(H_i\) by construction.
+% So, we can write
+% \[
+%     ||y_m - \overline{x}|| = \sqrt{\sum_{i} \langle y_m^{(i)}, \overline{x_i}  \rangle } \to 0
+% \]
+% as \(m \to \infty \), therefore the Cauchy sequence converges.
+
+% % https://math.stackexchange.com/questions/4543667/how-to-show-that-the-cartesian-product-of-hilbert-spaces-is-a-hilbert-space
+
+% \subsection{}
+% Showing that the union of the basis of \(H_i\) is a basis for \(H\) is actually straightforward; it comes in fact from the independence
+% of each \(H_i\) that is by construction.
+
+
+% Let's choose a \( x \in  H\) and by definition \(x(i) \in H_i\). We can rewrite \(x(i)\) as a
+% linear combination of it's basis, namely \(x(i)=\sum_{e \in  \mathcal{E}} \lambda_i^{(j)}e  \), where \(\lambda_i^{(j)}\) is the scalar corresponds
+% to the \(e_j\) basis element.
+
+% Clearly, each \(\lambda _i^{(j)} \ , \forall i \in  I\ ,  \forall j\) is independent and therefore \(x(i)\) can be constructed as linear combination of \(\cup _{i \in  I} \cup _{e \in  \mathcal{E}_i}e= \cup _{i \in  I}\mathcal{E}_i\).
+
+% \subsection{}
+% Let's take \(H_i\) countable for every \(i \in  I\).  Let's start with the case where \( \mathbb{I} \) is countable.
+% By the assumption of countability, there exists a sequence \(\{  x(i)_n\}_{n \in  \mathbb{N}} \) for all \(i\) such that every nonempty subset of \(H_i\) contains at least one element of the sequence.
+
+% We can than construct a sequence in \(H\) concatenating each sequence in \(H_i\). Because we are concatenating a countable set of countable series,
+% the resulting series is again countable.
+
+% \par
+
+% \setlength{\parindent}{20pt}
+% Conversely, if \( \mathbb{I} \) is uncountable, we can see by the axiom of countability, together with the previous point,
+% that it's indeed not possible to construct a countable basis. In fact, the basis from the previous exercise \(\bigcup_{i \in I} \mathcal{E}_i\) will not be countable,
+% making the space not separable.
+
+% \setlength{\parindent}{0pt}
+
+% \subsection{}
+% (\(\impliedby\) )
+% Assume that \(c= \sup _{i \in  I}||T_{n}||\) and let's take an arbitrary \( h= \{ h_i \}_{i \in  I}  \)
+% \begin{align*}
+%     ||Ah||^2_H & = ||\langle A_i h_{i} \rangle ||^2              \\
+%                & = \sum_{i \in  I} ||A_{i} h_{i} ||^2            \\
+%                & \leq  \sum_{i \in  I} ||A_{i} ||^2 ||h_{i} ||^2 \\
+%                & = \sum_{i \in  I}  c^2 ||h_{i} ||^2             \\
+%                & =c^2 ||h||^2
+% \end{align*}
+% So we also proved that \(A\) is bounded and \(||A|| = \sup _{i \in  I}||A_{i} ||\)
+
+% \(\implies \)
+% \begin{align*}
+%     ||Ah||^2 & = \sum_{i \in I}||A_{i} h_{i} ||^2                    \\
+%              & \leq  \sum_{i \in  i} c_i ||h_{i} ||^2                \\
+%              & \leq \infty \comment{\text{ using boundness of  } A }
+% \end{align*}
+% Because the series if bounded, and each term is positive, it mush imply that each \( c_i\) is also bounded.
+
+
+
+
+
+% \section{Exercise 4}
+% \subsection{}
+% Let's start noting how the operator \(S\) affects the inner product.
+
+% \[
+%     \langle Sx,y \rangle = \langle (0,x_1  , \dots ),y \rangle = \sum_{i=1}^{\infty} x_i y_{i+1}
+% \]
+% We can see that the inner product with \(x\) and the adjoint on \(y\) must be equal  \(\langle x,S^*y \rangle=\sum_{i=1}^{\infty} x_i y_{i+1} \)
+% which is the left shift operator
+% \[
+%     S^*(x_1,x_2,\dots ) = (x_2,x_3, \dots  )
+% \]
+% \subsection{}
+% Let's compute now te concatenation of \(S\) and its adjoint.
+% \[
+%     SS^*(x_1,x_2,\dots )=S(x_2,x_3, \dots  ) = (0,x_2,x_3, \dots  )
+% \]
+
+% Conversely
+% \[
+%     S^*S(x_1,x_2,\dots )=S(0,x_1,x_2,x_3, \dots  ) = (x_1,x_2, \dots  ) = x
+% \]
+
+% \subsection{}
+% And we can extend this to \(S^n\) and \((S^*)^n\)
+
+% \[
+%     S^n (S^*)^nx = (0^n,x_{n+1}, n_{n+2},\dots )
+% \]
+% and similarly
+% \[
+%     (S^*)^n S^n = x
+% \]
+
+\end{document}
