@@ -158,6 +158,46 @@ Which is a contradiction. Combining it with the previous point we get the desire
 \textcolor{red}{To double check that this is all we need.}
 
 
+\section{Exercise 2}
+\subsection{}
+Let's define \(H^{\prime}  = \bigvee \mathcal{F}\). By theorem 4.13 we have that \(\forall h \in  H^{\prime} \), \(h\) can be written as \(h = \sum_{e \in  F} \langle h,e \rangle e  \) as \(F\) is the basis for \(H^{\prime} \) again by theorem 4.13.
+
+Moreover, for every \(x \in H\), we have that by definition \(P_F x \in  H^{\prime} \).
+We define the operator \(Q\) as such
+\begin{equation}
+    Qx \coloneqq \sum_{e \in  F}\langle x,e \rangle e
+\end{equation}
+
+For \(Q\) to be equal to \(P_F\), \(Qx \) has to be the unique elements in \(H^{\prime} \) such that \(x - Qx \perp H^{\prime} \).
+We proceed by taking an orthogonal basis of \(H\) such that \(\mathcal{E} \subset B\).
+By theorem 4.13 again, by trivially noting that \(\bigvee H = H\), \(x\)can be represented as \(x=\sum_{e\in B}\langle x,e \rangle e  \).
+It follows that
+\begin{align*}
+    x-Qx & = \sum_{e \in  B}\langle x,e \rangle e - \sum_{e \in  F}\langle x,e \rangle e                                                   \\
+         & =  \sum_{e \in F}\langle x,e \rangle e+ \sum_{e \in  B\setminus F}\langle x,e \rangle e  - \sum_{e \in  F}\langle x,e \rangle e \\
+         & = \sum_{e \in  B\setminus F}\langle x,e \rangle e
+\end{align*}
+We conclude that since B is orthogonal, it follows that \(x-Qx \perp H^{\prime} = \bigvee F\).
+
+
+\subsection{}
+By the previous point, we can write \(P_G x = \sum_{e \in  G}\langle x,e \rangle e \) for every \(G \subset \mathcal{G}\).
+It follows that
+\begin{align*}
+    P_F P_G x & = P_F \left( \sum_{e \in  G}\langle x,e \rangle e  \right)
+    \\
+              & =\sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle \\
+\end{align*}
+By using the orthogonality of the elements of \(F,G \subset \mathcal{E}\) we rewrite the above as follows.
+
+\begin{align*}
+    \sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle & = \sum_{ e \in  F \cap G}\langle \langle x,e \rangle e,e  \rangle \\
+                                                                                                & = \sum_{e \in  F \cap G} \langle x,e \rangle  e = P_{F \cap G}x
+\end{align*}
+As this holds for arbitrary \(F, G\), proceeding the same fashion for \(P_G P_F\) completes the proof.
+
+
+
 
 % \section{Exercise 2}
 % \subsection{}
