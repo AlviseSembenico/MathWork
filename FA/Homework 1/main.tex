@@ -186,183 +186,86 @@ It follows that
 \begin{align*}
     P_F P_G x & = P_F \left( \sum_{e \in  G}\langle x,e \rangle e  \right)
     \\
-              & =\sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle \\
+              & =\sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle  e' \\
 \end{align*}
 By using the orthogonality of the elements of \(F,G \subset \mathcal{E}\) we rewrite the above as follows.
 
 \begin{align*}
-    \sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle & = \sum_{ e \in  F \cap G}\langle \langle x,e \rangle e,e  \rangle \\
-                                                                                                & = \sum_{e \in  F \cap G} \langle x,e \rangle  e = P_{F \cap G}x
+    \sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle e' & = \sum_{ e \in  F \cap G}\langle \langle x,e \rangle e,e  \rangle \\
+                                                                                                   & = \sum_{e \in  F \cap G} \langle x,e \rangle  e = P_{F \cap G}x
 \end{align*}
+
 As this holds for arbitrary \(F, G\), proceeding the same fashion for \(P_G P_F\) completes the proof.
 
+\subsection{}
+\begin{align*}
+    P_{\bigcup_{i=1}^{n} F_i } & = P_{\bigcup_{i=1}^{n-1}  \cup F_n} = P_{F_j \cup F_n} = P_{F_j}+P_{F_n} \\
+\end{align*}
+Where we used the exercise above for the last equation.
+By induction, we show that
+\begin{equation}
+    P_{\bigcup_{i=1}^{n} F_i }  = \sum_{i=1} ^n P_{F_i}
+\end{equation}
+We are now interest at the limit of those objects. Assume \(\lim_{n \to \infty} \sum_{i} ^n P_{F_i}x \to  x_0\) in the norm sense. Thus, there exists an \(n_0>0\) such that for every \(n>n_0\)
+\begin{equation}
+    \| \sum_{i=1} ^n P_{F_i}x - x_0 \| < \epsilon \\
+\end{equation}
+It follows that
+\begin{align*}
+    \| P_{} - x_0 \| < \epsilon \\ \\
+\end{align*}
 
 
+\subsection{}
+We prove by giving a counterexample that \(\sum_{i}^{\infty}  P_{F_i}x \) does not converge in the operator norm.
+Let's define \(F_i= e_i\) where \(e_i \cap  e_j  = \varnothing \) and \(\| e_i \| = 1 \) for every \(i\).
+Take now \(\epsilon =\frac{1}{2}\), then, for for every \(n>N\)
+\begin{align*}
+    \| \sum_{i=0}^{\infty} P_{F_i}x - \sum_{i=0}^n P_{F_i}x \| & = \| \sum_
+    {i=n}^{\infty}  P_{F_i}x \| = 1 >\frac{1}{2}                            \\
+\end{align*}
+Therefore, for \(\epsilon =\frac{1}{2}\) there exists no \(n>0\) such that the the difference of the norm converges.
 
-% \section{Exercise 2}
-% \subsection{}
-% Using theorem I.4.13, we can write \(x\) as sum of dot product with the basis elements of \(H\), namely.
-
-% \begin{align*}
-%     x     & = \sum_{e in \mathcal{E}}\langle x,e \rangle e                                                                                           \\
-%           & = \sum_{e \in \mathcal{E}\setminus F  }\langle x,e \rangle  e+ \sum_{e \in F} \langle x,e \rangle e                                      \\
-%     P_F x & = P_F \sum_{e \in \mathcal{E}\setminus F  }\langle x,e \rangle  e+ P_F \sum_{e \in F} \langle x,e \rangle e \comment{Linearity of $P_F$} \\
-%           & = P_F \sum_{e \in F} \langle x,e \rangle e \comment{First property of theorem 2.7 point d}
-% \end{align*}
-
-% Now we have to prove that
-% \[
-%     P_F x = \sum_{e \in F} \langle x,e \rangle e
-% \]
-% Without loss of generality, we can add a generic \(\widetilde{x} \) to the result.
-% \begin{align*}
-%     P_F x & = \sum_{e \in F} \langle x,e \rangle e  + \widetilde{x}                                               \\
-%     P_F x & =   P_F \sum_{e \in F} \langle x,e \rangle e + P_F \widetilde{x} \comment{using propery c of th. 2.7} \\
-%           & =  \sum_{e \in F} \langle x,e \rangle e  + \widetilde{x} + P_F \widetilde{x}
-% \end{align*}
-% Which means that \(P_F \widetilde{x} = 0 \) which is possible if \(\widetilde{x} \) has no support in \(\operatorname{span} \bigvee F\). That means that \(\widetilde{x}\) must be 0.
-
-
-% \subsection{}
-
-% Let's start with proving that \(P_F P_G x = P_{F\cap G}\).
-% \[
-%     P_F P_G x= P_F \sum_{e \in  G}<x,e>e = \sum_{e \in  G}P_F <x,e>e = \sum_{_e \in  G \cap F}<x,e>e = P_{F \cap G}
-% \]
-% In this set of equalities we used 1. the linearity of the operator \(P_F\) and the orthogonality of the basis' elements \(e\).
-% The proof of \(P_G P_F x= P_{F \cap G}\) is analogous.
-
-% \subsection{}
-% I will prove \(P_{\bigcup_{i=1}^{\infty} F_i} x=\sum_{i=1}^{\infty} P_{F_i} x \) by induction.
-% \begin{align}
-%     P_{F_1 \cup F_2} & = \sum_{e \in  F_1 \cup F_2}<e,x>e                                                                      \\
-%                      & = \sum_{e \in F_1}<e,x>e  +\sum_{e \in  F_2}<e,x>e - \overbrace{\sum_{e \in  F_1 \cap F_2}<e,x,>e}^{=0} \\
-%                      & = P_{F_1}x+P_{F_2}x
-% \end{align}
-% This step is actually sufficient because for \(n=3\) we can rewrite it as \(F_1 \cap F_2 \cap F_3= F_{12} \cap F_3\) which I just proved to hold.
-
-% \subsection{}
-% By the theorem I.2.7 (Conway), any projection operator has norm
-% \[
-%     ||P_{F_k}x|| =\sup \left\{\left\|\left\langle x, e_k\right\rangle e_k\right\|:\|x\| \leq 1\right\}= 1
-% \]
-
-% And therefore
-% \[
-%     \lim_{n \to \infty} P_{F_n} \neq 0
-% \]
-% which implies that the series does not converge.
-% As an example we can take the standard projector \(P_{F_n} = <x,e_n>e_n\).
-
-% \section{Exercise 3}
-% \subsection{}
-% Let's first prove the existance of the inner product \(\langle x,y \rangle =\sum_{_i \in  \mathbb{I}}\langle x(i),y(i) \rangle  \)\dots
-
-% \[
-%     \begin{aligned}
-%         \sum_{i}\langle x(i),y(i) \rangle & \leq \sum_{i} |\langle x(i),y(i) \rangle |                                                         \\
-%                                           & \leq \sum_{i} ||x(i)|| \cdot||y(i)||                                                               \\
-%                                           & \leq \sum_{i \in  I,\ x(i)\geq y(i)}||x(i)||^2 + \sum_{i \in  I,\ x(i)<y(i)}||y(i)||^2 \leq \infty
-%     \end{aligned}
-% \]
-% Where for the second equality we used Cauchy-Schwarz inequality.
-
-% Let's now prove the completeness of the inner product.
-% Let's take a Cauchy sequence \(\{  y_m\}_{m>1} \coloneqq \{ (x_i^{(m)}) \}_{m>1} \). Consequently, it mush be that \({x_i^{(m)}}_{m>1}\) is a Cauchy sequence for every
-% \(i \in  I\)  .
-
-% Therefore, each \({x_i^{(m)}}_{m>1}\) must converge to a \(\overline{x_i} \) because it lives in the Hilbert space \(H_i\) by construction.
-% So, we can write
-% \[
-%     ||y_m - \overline{x}|| = \sqrt{\sum_{i} \langle y_m^{(i)}, \overline{x_i}  \rangle } \to 0
-% \]
-% as \(m \to \infty \), therefore the Cauchy sequence converges.
-
-% % https://math.stackexchange.com/questions/4543667/how-to-show-that-the-cartesian-product-of-hilbert-spaces-is-a-hilbert-space
-
-% \subsection{}
-% Showing that the union of the basis of \(H_i\) is a basis for \(H\) is actually straightforward; it comes in fact from the independence
-% of each \(H_i\) that is by construction.
-
-
-% Let's choose a \( x \in  H\) and by definition \(x(i) \in H_i\). We can rewrite \(x(i)\) as a
-% linear combination of it's basis, namely \(x(i)=\sum_{e \in  \mathcal{E}} \lambda_i^{(j)}e  \), where \(\lambda_i^{(j)}\) is the scalar corresponds
-% to the \(e_j\) basis element.
-
-% Clearly, each \(\lambda _i^{(j)} \ , \forall i \in  I\ ,  \forall j\) is independent and therefore \(x(i)\) can be constructed as linear combination of \(\cup _{i \in  I} \cup _{e \in  \mathcal{E}_i}e= \cup _{i \in  I}\mathcal{E}_i\).
-
-% \subsection{}
-% Let's take \(H_i\) countable for every \(i \in  I\).  Let's start with the case where \( \mathbb{I} \) is countable.
-% By the assumption of countability, there exists a sequence \(\{  x(i)_n\}_{n \in  \mathbb{N}} \) for all \(i\) such that every nonempty subset of \(H_i\) contains at least one element of the sequence.
-
-% We can than construct a sequence in \(H\) concatenating each sequence in \(H_i\). Because we are concatenating a countable set of countable series,
-% the resulting series is again countable.
-
-% \par
-
-% \setlength{\parindent}{20pt}
-% Conversely, if \( \mathbb{I} \) is uncountable, we can see by the axiom of countability, together with the previous point,
-% that it's indeed not possible to construct a countable basis. In fact, the basis from the previous exercise \(\bigcup_{i \in I} \mathcal{E}_i\) will not be countable,
-% making the space not separable.
-
-% \setlength{\parindent}{0pt}
-
-% \subsection{}
-% (\(\impliedby\) )
-% Assume that \(c= \sup _{i \in  I}||T_{n}||\) and let's take an arbitrary \( h= \{ h_i \}_{i \in  I}  \)
-% \begin{align*}
-%     ||Ah||^2_H & = ||\langle A_i h_{i} \rangle ||^2              \\
-%                & = \sum_{i \in  I} ||A_{i} h_{i} ||^2            \\
-%                & \leq  \sum_{i \in  I} ||A_{i} ||^2 ||h_{i} ||^2 \\
-%                & = \sum_{i \in  I}  c^2 ||h_{i} ||^2             \\
-%                & =c^2 ||h||^2
-% \end{align*}
-% So we also proved that \(A\) is bounded and \(||A|| = \sup _{i \in  I}||A_{i} ||\)
-
-% \(\implies \)
-% \begin{align*}
-%     ||Ah||^2 & = \sum_{i \in I}||A_{i} h_{i} ||^2                    \\
-%              & \leq  \sum_{i \in  i} c_i ||h_{i} ||^2                \\
-%              & \leq \infty \comment{\text{ using boundness of  } A }
-% \end{align*}
-% Because the series if bounded, and each term is positive, it mush imply that each \( c_i\) is also bounded.
+\section{Exercise 3}
 
 
 
 
 
-% \section{Exercise 4}
-% \subsection{}
-% Let's start noting how the operator \(S\) affects the inner product.
+\section{Exercise 4}
+\subsection{}
+Let's start noting how the operator \(S\) affects the inner product.
 
-% \[
-%     \langle Sx,y \rangle = \langle (0,x_1  , \dots ),y \rangle = \sum_{i=1}^{\infty} x_i y_{i+1}
-% \]
-% We can see that the inner product with \(x\) and the adjoint on \(y\) must be equal  \(\langle x,S^*y \rangle=\sum_{i=1}^{\infty} x_i y_{i+1} \)
-% which is the left shift operator
-% \[
-%     S^*(x_1,x_2,\dots ) = (x_2,x_3, \dots  )
-% \]
-% \subsection{}
-% Let's compute now te concatenation of \(S\) and its adjoint.
-% \[
-%     SS^*(x_1,x_2,\dots )=S(x_2,x_3, \dots  ) = (0,x_2,x_3, \dots  )
-% \]
+\[
+    \langle Sx,y \rangle = \langle (0,x_1  , \dots ),y \rangle = \sum_{i=1}^{\infty} x_i y_{i+1}
+\]
+We can see that the inner product with \(x\) and the adjoint on \(y\) must be equal  \(\langle x,S^*y \rangle=\sum_{i=1}^{\infty} x_i y_{i+1} \)
+which is the left shift operator
+\[
+    S^*(x_1,x_2,\dots ) = (x_2,x_3, \dots  )
+\]
+\subsection{}
+Let's compute now te concatenation of \(S\) and its adjoint.
+\[
+    SS^*(x_1,x_2,\dots )=S(x_2,x_3, \dots  ) = (0,x_2,x_3, \dots  )
+\]
 
-% Conversely
-% \[
-%     S^*S(x_1,x_2,\dots )=S(0,x_1,x_2,x_3, \dots  ) = (x_1,x_2, \dots  ) = x
-% \]
+Conversely
+\[
+    S^*S(x_1,x_2,\dots )=S(0,x_1,x_2,x_3, \dots  ) = (x_1,x_2, \dots  ) = x
+\]
 
-% \subsection{}
-% And we can extend this to \(S^n\) and \((S^*)^n\)
+\subsection{}
+And we can extend this to \(S^n\) and \((S^*)^n\)
 
-% \[
-%     S^n (S^*)^nx = (0^n,x_{n+1}, n_{n+2},\dots )
-% \]
-% and similarly
-% \[
-%     (S^*)^n S^n = x
-% \]
+\[
+    S^n (S^*)^nx = (0^n,x_{n+1}, n_{n+2},\dots )
+\]
+and similarly
+\[
+    (S^*)^n S^n = x
+\]
+
+
 
 \end{document}
