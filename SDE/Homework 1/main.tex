@@ -37,6 +37,7 @@
 \fancyhf{} % This makes sure we do not have other information in our header or footer.
 
 \lhead{\footnotesize Numerics for SDE}% \lhead puts text in the top left corner. \footnotesize sets our font to a smaller size.
+\newtheorem{proposition}{Proposition}
 
 %\rhead works just like \lhead (you can also use \chead)
 \rhead{\footnotesize Alvise Sembenico}%, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
@@ -175,6 +176,21 @@ It follows that \(B^{\prime} = A \mathcal{W}- D^{n}A \mathcal{W}  =(I-D^n)A \mat
     W\left( \frac{1}{t_n} \right)
 \end{bmatrix}\).
 From this representation we get that \(B^{\prime} \) is a multivariate Gaussian Since, implying that each marginal is also Gaussian.
+Moreover, we have that \(\mathbb{E} \left[ B_{t_n}- B_{t_{b_{n-1}}} = 0  \right]\). Moreover, we have that
+\begin{align*}
+    \Cov\left[B^{\prime}_i, B^{\prime} _j \right]
+     & = \mathbb{E} \left[ B_{i}^{\prime}B^{\prime} _j   \right]                                                                                                                                                                                                                                                                                                                       \\
+     & = \mathbb{E} \left[ \left( W\left( \frac{1}{t_i} \right) - W\left( \frac{1}{t_{i-1}} \right) \right) \left( W\left( \frac{1}{t_j} \right) - W\left( \frac{1}{t_{j-1}} \right) \right) \right]                                                                                                                                                                                   \\
+     & = \mathbb{E} \left[ W\left( \frac{1}{t_i} \right) W\left( \frac{1}{t_j} \right) \right] - \mathbb{E} \left[ W\left( \frac{1}{t_i} \right) W\left( \frac{1}{t_{j-1}} \right) \right] - \mathbb{E} \left[ W\left( \frac{1}{t_{i-1}} \right) W\left( \frac{1}{t_j} \right) \right] + \mathbb{E} \left[ W\left( \frac{1}{t_{i-1}} \right) W\left( \frac{1}{t_{j-1}} \right) \right] \\
+     & = 0
+\end{align*}
+
+From the previous point, by taking the limit of the mesh \(\mathcal{P}\), we have that for every \(a_t\) and \(t \in  [0, \infty ) \cap \mathbb{Q}\), the following holds true: \(P(\{ B(t) <a_t , a_t \in  \mathbb{R},t \in  [0, \infty ) \cap \mathbb{Q} \} ) = P(\{ B(t) <a_t , a_t \in  \mathbb{R},t \in  [0, \infty ) \cap \mathbb{Q} \} )\).
+To conclude the proof that \(B\) is continuous at \(t=0\) we use the following proposition.
+\begin{proposition}
+    Let \((x_n)_{n \in  \mathbb{Q}}\) with \(x_n \to 0\) and let \( X(x_n) \xrightarrow{d} Y(x_n) \), \( Y(x_n) \to c \) a.s.. Then, \( X(x_n) \to c \) a.s..
+\end{proposition}
+
 
 
 \section{Exercise 2}
