@@ -1,0 +1,117 @@
+
+\documentclass[a4paper,12pt]{article} % This defines the style of your paper
+
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+
+% fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mathtools}
+   
+% The following two packages - multirow and booktabs - are needed to create nice looking tables.
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+
+% The default setting of LaTeX is to indent new paragraphs. This is useful for articles. But not really nice for homework problem sets. The following command sets the indent to 0.
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+
+% Package to place figures where you want them.
+\usepackage{float}
+
+% The fancyhdr package let's us create nice headers.
+\usepackage{fancyhdr} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header (and Footer)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy} % With this command we can customize the header style.
+
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+\lhead{\footnotesize Numerics for SDE}% \lhead puts text in the top left corner. \footnotesize sets our font to a smaller size.
+
+%\rhead works just like \lhead (you can also use \chead)
+\rhead{\footnotesize Alvise Sembenico}%, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
+
+% Similar commands work for the footer (\lfoot, \cfoot and \rfoot).
+% We want to put our page number in the center.
+\cfoot{\footnotesize \thepage} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+\newcommand{\comment}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{center} % Everything within the center environment is centered.
+    {\Large \bf Homework 1}
+\end{center}
+
+\vspace{0.4cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE HOMEWORK
+% Can be written right here or in the dedicated files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onehalfspacing
+\section{Exercise 1}
+
+
+\section{Exercise 2}
+In this exercise we will prove the following equality:
+\begin{equation}
+    \int_0^T t \, dW(t) = T W(T) - \int_0^T W(t) \, dt
+\end{equation}
+Look at the left hand side, by taking it's forward Euler we obtain
+\begin{equation}
+    I_1 = \int _0^T t dW(t) = \sum_{n=0}^{N-1} t_n (W(t_{n-1} -W(t_n) )).
+\end{equation}
+Applying the hint, i.e. using the Abel's summation by parts we get
+\begin{align*}
+    \sum_{n=0}^{N-1} t_n (W(t_{n-1} -W(t_n) )) & = t_N W(t_N) - t_0 W(t_0) - \sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1}) \\
+                                               & = T W(T)  - \sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1}).
+\end{align*}
+What is left to prove is the convergence in \(L_2\) of the right hand side, i.e. the following equation.
+\begin{equation}
+    \lim_{n \to \infty} \mathbb{E} \left[ \left(   \int _0^T W(t)dt-\sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1})  \right)^2\right] =0.
+\end{equation}
+Let's fix \(t_n - t_{n-1} = \Delta t\) for every \(n\geq 0\).
+Using the linearity of the integral, we can rewrite it as follows
+\begin{align*}
+    \mathbb{E} \left[ \left( \sum_{n=0}^{N-1}  \int _{t_{n-1}}^{t_n} W(t)dt-\sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1}) \right) ^2  \right] & = \mathbb{E} \left[ \left(   \sum_{n=0}^{N-1}  \int _{t_{n-1}}^{t_n} W(t)-W(t_n)dt  \right)^2 \right] \\
+                                                                                                                                        & =\sum_{n=0}^{N-1} \mathbb{E} \left[  \int _{t_{n-1}}^{t_n} W(t)-W(t_n) dt \right]                     \\
+                                                                                                                                        & = \sum_{n=0}^{N-1} \mathbb{E} \left[  e_n ^2 \right].
+\end{align*}
+Where \(e_n\) is n-th error term. Moreover, in the last equation we dropped the cross terms  since \(\mathbb{E} \left[ e_i e_j \right] = 0 \) by the properties of the Brownian motion.
+
+Next, we compute \(\mathbb{E} \left[ e_n^2 \right]\) for every \(n \geq 0\).
+
+\begin{align*}
+    \mathbb{E} \left[ e_n^2 \right] & = \mathbb{E} \left[ \left(  \int _{t_n}^{t_{n-1}} W(t)- W(t_n)dt  \right)^2\right]                                                         \\
+                                    & = \mathbb{E} \left[  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \left( W(t)-W(t_n)dt \right)\left( W(t)- W(t_n)ds \right)   \right]     \\
+                                    & = \mathbb{E} \left[  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \left( W(t)-W(t_n) \right)\left( W(t)- W(t_n) \right) dt ds   \right] . \\
+\end{align*}
+Where we used twice Fubini's Theorem. We also use Fubini for the following equality.
+
+\begin{align*}
+    \mathbb{E} \left[  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \left( W(t)-W(t_n) \right)\left( W(t)- W(t_n) \right) dt ds   \right] & =  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \mathbb{E} \left[  \left( W(t)-W(t_n) \right)\left( W(t)- W(t_n) \right) dt ds   \right]
+\end{align*}
+
+
+
+\end{document}
