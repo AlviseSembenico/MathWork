@@ -10,6 +10,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{enumitem}
+\usepackage{amsthm}
 \usepackage{mathtools}
   
 % The following two packages - multirow and booktabs - are needed to create nice looking tables.
@@ -26,6 +27,7 @@
 % The fancyhdr package let's us create nice headers.
 \usepackage{fancyhdr} 
 
+\newtheorem{proposition}{Proposition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Header (and Footer)
@@ -105,19 +107,24 @@ Denote \(F_0 = F_0^a \cup F_0^b\), it follows that for every \(F > F_0\)
 Because \(\epsilon\) was arbitrary, we conclude that \(\sum_{x \in A \cup B}\to \sum_{a \in  A} a + \sum_{b \in  B}b   \).
 
 \subsection{}
+Let's start by proving the following proposition:
 
-Let's star by proving that any converging net of positive numbers has at most a countable number of non zero elements.
+\begin{proposition}
+    Any converging \(\sum_{a \in  A}a \to x\)  of positive numbers has at most a countable number of non zero elements. That is, \(\sum_{a \in A}x = \sum_{i \in  \mathbb{N}}a_i \), meaning that they converge to the same value \(x\).
+\end{proposition}
+\begin{proof}
+    Say that the net converges to \(M\), i.e. \(\sum_{a \in  A} a = M <\infty  \) where for every \(a \in A, a>0\). Consider now the sets \(S_n = \{ a \in  A | a> \frac{1}{n} \} \), then
+    \begin{align*}
+        M \geq \sum_{a \in  S_n}a \geq  \sum_{a \in  S_n}\frac{1}{n}= \frac{N}{n}. \\
+    \end{align*}
+    As \(M < \infty \)  so is \(N\) which is the cardinality of the set \(S_n\).
+    It follows that
+    \begin{equation}
+        \# \{ a \in  A | a>0 \}= \# S = \# \bigcup_{n=\mathbb{N}}^{\infty} S_n
+    \end{equation}
+    We conclude that \(A\) has at most countable number of non zero elements as countable union of finite sets.
+\end{proof}
 
-Say that the net converges to \(M\), i.e. \(\sum_{a \in  A} a = M <\infty  \) where for every \(a \in A, a>0\). Consider now the sets \(S_n = \{ a \in  A | a> \frac{1}{n} \} \), then
-\begin{align*}
-    M \geq \sum_{a \in  S_n}a \geq  \sum_{a \in  S_n}\frac{1}{n}= \frac{N}{n}. \\
-\end{align*}
-As \(M < \infty \)  so is \(N\) which is the cardinality of the set \(S_n\).
-It follows that
-\begin{equation}
-    \# \{ a \in  A | a>0 \}= \# S = \# \bigcup_{n=\mathbb{N}}^{\infty} S_n
-\end{equation}
-We conclude that \(A\) has at most countable number of non zero elements as countable union of finite sets.
 
 Let's now prove the \((\implies) \) direction.
 Given the previously proven statement, we can rewrite the net as countable sum and thus define a corresponding sequence \(x_n = \sum_{i=0}^n a_{i}  \) where w.log. we associated every non zero element \(a\)  of \(A\) to an index \(i\) so that \(a_i = a\).
@@ -134,7 +141,7 @@ We now prove the opposite implication \((\impliedby)\). Assume that \(\sup \left
 Let's define now what does it mean for a net to be increasing. Given a set \(F_0\), it holds that for every \(F > F_0\) we have that \(\sum_{a\in  F}a \geq  \sum_{a \in  F_0}a  \).
 
 By the definition of net convergence for standard set inclusion as order, we obtain that the net \(\sum_{a\in  A}a \) is increasing.
-It follows that for every \(F\), \(\sum_{a \in  F} \leq  x_0 +t \). Moreover, since \(\sum_{a \in  A} a \to x_{0}+t  \), there exists and \(F_t\)  such that \(\forall F > F_t\) \(\| \sum_{a \in  F} a -x_{0}-t   \| < \frac{t}{2} \). It follows
+It follows that for every \(F\), \(\sum_{a \in  F} \leq  x_0 +t \). Moreover, since \(\sum_{a \in  A} a \to x_{0}+t  \), there exists and \(F_t\)  such that \(\forall F > F_t\) we have \(\| \sum_{a \in  F} a -x_{0}-t   \| < \frac{t}{2} \). It follows
 \begin{align*}
     \| \sum_{a \in  F} a -x_0 -t  \| & \leq 0                                   \\
     \| \sum_{a \in  F} a -x_0 -t  \| & =  \sum_{a \in  F} a -x_0 -t<\frac{t}{2} \\
@@ -148,14 +155,10 @@ Let's conclude the proof by showing that
     \sup \left\{ \sum_{a \in F} a : F \in \mathcal{F} \right\} = \sum_{a \in  A} a = x_0.
 \end{equation}
 Take an arbitrary \(x<x_0\). By contradiction, assume that \(\sup \left\{ \sum_{a \in F} a : F \in \mathcal{F} \right\} = x\).
-Again, by convergence of the net, there exists a \(F_0\) such that \(\forall F>F_0\) we have
-\begin{align*}
-    \| \sum_{a \in F}a -x_0  \| & <|x-x_0| \\
-    x_0 - \sum_{a \in  F}       & x_{0}-x  \\
-    \sum_{a \in  F}a            & >x
-\end{align*}
-Which is a contradiction. Combining it with the previous point we get the desired equality.
-\textcolor{red}{To double check that this is all we need.}
+Again, by convergence of the net, there exists a \(F_0\) such that \(\forall F>F_0\) we have \(    \| \sum_{a \in F}a -x_0  \|  <|x-x_0|\). As both quantities are negative, it follows that
+\(    \sum_{a \in  F} a- x_0 > x-x_0\) which leads to the contradiction \(\sum_{a \in  F} a > x \).
+Combining it with the previous point we get the desired equality.
+% \textcolor{red}{To double check that this is all we need.}
 
 
 \section{Exercise 2}
@@ -163,14 +166,14 @@ Which is a contradiction. Combining it with the previous point we get the desire
 Let's define \(H^{\prime}  = \bigvee \mathcal{F}\). By theorem 4.13 we have that \(\forall h \in  H^{\prime} \), \(h\) can be written as \(h = \sum_{e \in  F} \langle h,e \rangle e  \) as \(F\) is the basis for \(H^{\prime} \) again by theorem 4.13.
 
 Moreover, for every \(x \in H\), we have that by definition \(P_F x \in  H^{\prime} \).
-We define the operator \(Q\) as such
+We define the operator \(Q\) acting on \(x\) as such
 \begin{equation}
-    Qx \coloneqq \sum_{e \in  F}\langle x,e \rangle e
+    Qx \coloneqq \sum_{e \in  F}\langle x,e \rangle e.
 \end{equation}
 
 For \(Q\) to be equal to \(P_F\), \(Qx \) has to be the unique elements in \(H^{\prime} \) such that \(x - Qx \perp H^{\prime} \).
-We proceed by taking an orthogonal basis of \(H\) such that \(\mathcal{E} \subset B\).
-By theorem 4.13 again, by trivially noting that \(\bigvee H = H\), \(x\)can be represented as \(x=\sum_{e\in B}\langle x,e \rangle e  \).
+We proceed by taking an orthogonal basis of \(H\) such that \(\mathcal{E} \subset B\), this basis is guaranteed to exist given the proposition 4.2.
+By theorem 4.13 again, by trivially noting that \(\bigvee H = H\), \(x\) can be represented as \(x=\sum_{e\in B}\langle x,e \rangle e  \).
 It follows that
 \begin{align*}
     x-Qx & = \sum_{e \in  B}\langle x,e \rangle e - \sum_{e \in  F}\langle x,e \rangle e                                                   \\
@@ -186,34 +189,57 @@ It follows that
 \begin{align*}
     P_F P_G x & = P_F \left( \sum_{e \in  G}\langle x,e \rangle e  \right)
     \\
-              & =\sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle  e' \\
+              & = \sum_{e \in  G} P_F \langle x,e \rangle e.                                                                \\
+              & = \sum_{e \in  G} \sum_{e^{\prime}  \in F} \langle \langle e, x \rangle e, e^{\prime}  \rangle e^{\prime}   \\
+              & = \sum_{e \in  G} \sum_{e^{\prime}  \in F}   \langle e, x \rangle \langle e, e^{\prime}  \rangle e^{\prime} \\
+              & = \sum_{e \in  G \cap F}\langle e, x \rangle  e .
 \end{align*}
-By using the orthogonality of the elements of \(F,G \subset \mathcal{E}\) we rewrite the above as follows.
+Where we used the orthogonality of \(P_F\) and the fact that the set \(F,G\) are orthonormal.
+% By using the orthogonality of the elements of \(F,G \subset \mathcal{E}\) we rewrite the above as follows.
 
-\begin{align*}
-    \sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle e' & = \sum_{ e \in  F \cap G}\langle \langle x,e \rangle e,e  \rangle \\
-                                                                                                   & = \sum_{e \in  F \cap G} \langle x,e \rangle  e = P_{F \cap G}x
-\end{align*}
+% \begin{align*}
+%     \sum_{e^{\prime}  \in F} \langle \sum_{e \in  G}\langle x,e \rangle e   ,e^{\prime} \rangle e' & = \sum_{ e \in  F \cap G}\langle \langle x,e \rangle e,e  \rangle \\
+%                                                                                                    & = \sum_{e \in  F \cap G} \langle x,e \rangle  e = P_{F \cap G}x
+% \end{align*}
 
-As this holds for arbitrary \(F, G\), proceeding the same fashion for \(P_G P_F\) completes the proof.
+% As this holds for arbitrary \(F, G\), proceeding the same fashion for \(P_G P_F\) completes the proof.
 
 \subsection{}
+Given an arbitrary finite family of disjoin orthonormal basis \((F_n)_{n \in \mathbb{N}}\).
 \begin{align*}
-    P_{\bigcup_{i=1}^{n} F_i } & = P_{\bigcup_{i=1}^{n-1}  \cup F_n} = P_{F_j \cup F_n} = P_{F_j}+P_{F_n} \\
+    P_{\bigcup_{i=1}^{n} F_i } & = P_{\bigcup_{i=1}^{n-1}  \cup F_n} = P_{F_j \cup F_n} \\
 \end{align*}
-Where we used the exercise above for the last equation.
-By induction, we show that
-\begin{equation}
-    P_{\bigcup_{i=1}^{n} F_i }  = \sum_{i=1} ^n P_{F_i}
-\end{equation}
-We are now interest at the limit of those objects. Assume \(\lim_{n \to \infty} \sum_{i} ^n P_{F_i}x \to  x_0\) in the norm sense. Thus, there exists an \(n_0>0\) such that for every \(n>n_0\)
-\begin{equation}
-    \| \sum_{i=1} ^n P_{F_i}x - x_0 \| < \epsilon \\
-\end{equation}
-It follows that
+Where \(F_j \coloneqq  \bigcup_{i=1}^{n-1}F_i \). Thus, we just have to prove the above statement for two sets. This follows directly from the linearity of the sum, i.e.
 \begin{align*}
-    \| P_{} - x_0 \| < \epsilon \\ \\
+    P_{F_i}x + P_{F_j}x & = \sum_{e \in F_i} \langle x,e \rangle e + \sum_{e \in  F_j} \langle x, e \rangle e = \sum_{e \in  F_i \cup F_j}\langle x,e \rangle e= P_{F_i \cup F_j}.
 \end{align*}
+
+For the convergence, we have that for a fixed \(\epsilon >0\), for all \(n>n_0\) the following holds true:
+\begin{equation}
+    \| P_{\bigcup_{i=1}^{\infty}F_i}x - \sum_{e \in  \bigcup_{i=1}^{n} F_i} \langle x,e \rangle  e  \|  = \| P_{\bigcup_{i=1}^{\infty}F_i}x - \sum_{ i=1}^n \sum_{e \in  F_i}\langle x,e \rangle e   \| < \epsilon.
+\end{equation}
+Equivalently, for the same \(\epsilon \), there exists a \(n_0^{\prime} \)  such that for all \(n>n_0\)
+\begin{equation}
+    \| \sum_{i} ^{\infty} P_{F_i}x - \sum_{i}^n P_{F_i}x  \| =      \| \sum_{i} ^{\infty} P_{F_i}x - \sum_{i}^n \sum_{e \in  F_i}\langle e,x \rangle x   \| < \epsilon
+\end{equation}
+By taking \(\overline{n} = \max (n_0, n_{0}^{\prime} )\) we get
+that both limits converge to the same value. By uniqueness of the limit we have that
+\begin{equation}
+    P_{\bigcup_{i=1}^{\infty} F_i} x = \sum_{i=1}^{\infty} P_{F_i} x.
+\end{equation}
+% Where we used the exercise above for the last equation.
+% By induction, we show that
+% \begin{equation}
+%     P_{\bigcup_{i=1}^{n} F_i }  = \sum_{i=1} ^n P_{F_i}
+% \end{equation}
+% We are now interest at the limit of those objects. Assume \(\lim_{n \to \infty} \sum_{i} ^n P_{F_i}x \to  x_0\) in the norm sense. Thus, there exists an \(n_0>0\) such that for every \(n>n_0\)
+% \begin{equation}
+%     \| \sum_{i=1} ^n P_{F_i}x - x_0 \| < \epsilon \\
+% \end{equation}
+% It follows that
+% \begin{align*}
+%     \| P_{} - x_0 \| < \epsilon \\ \\
+% \end{align*}
 
 
 \subsection{}
@@ -234,6 +260,7 @@ Therefore, for \(\epsilon =\frac{1}{2}\) there exists no \(n>0\) such that the t
 
 \section{Exercise 4}
 \subsection{}
+
 Let's start noting how the operator \(S\) affects the inner product.
 
 \[
