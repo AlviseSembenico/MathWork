@@ -40,7 +40,7 @@
 \newtheorem{proposition}{Proposition}
 
 %\rhead works just like \lhead (you can also use \chead)
-\rhead{\footnotesize Alvise Sembenico}%, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
+\rhead{\footnotesize Alvise Sembenico, Tamira Lopes (group 9)}%, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
 
 % Similar commands work for the footer (\lfoot, \cfoot and \rfoot).
 % We want to put our page number in the center.
@@ -404,7 +404,16 @@ To corroborate this, by running numerical experiments, we can see that indeed it
     \label{fig:my_image}
 \end{figure}
 
-Regarding the variance, we plot in \ref{fig:covariance} the theoretical variance as well as the numeric one.
+The variance of the process is plotted against its asymptotic limit in figure \ref{fig:var}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{plots/variance.png} % Replace 'example-image' with the filename of your image
+    \caption{Variance of the process \(X_t\) against the theoretical limit \(\frac{b^{2} }{2a}\).}
+    \label{fig:var}
+\end{figure}
+
+Finally, regarding the covariance, we plot in \ref{fig:covariance} the theoretical variance as well as the numeric one.
 
 
 \begin{figure}[h!]

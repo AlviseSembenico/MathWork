@@ -76,7 +76,7 @@ Let's define \(x_0\) as the limit of the net
 \begin{equation}
     \sum_{a \in  A}a \to x_0.
 \end{equation}
-Since it converges, it means that there exist a set \(F_0 \subset A\) such that for all \(F > F_0\) the following holds
+Since it converges, it means that there exists a set \(F_0 \subset A\) such that for all \(F > F_0\) the following holds
 \begin{equation}
     \| \sum_{a \in  F}a - x_0  \| < \epsilon
 \end{equation}
@@ -85,7 +85,7 @@ for a given \(\epsilon >0\). Since \(\epsilon \) is arbitrary, we can choose \(F
 \begin{equation}
     \| \sum_{a \in  F}a - x_0  \| < \frac{\epsilon}{|\alpha| }.
 \end{equation}
-Then, by properties of the norm we obtain
+Then, by properties of the norm, we obtain
 \begin{align*}
     \vert \alpha \vert \| \sum_{a \in  F}a - x_0  \| & < \frac{\epsilon}{|\alpha| }\alpha = \epsilon \\
     \| \alpha \sum_{a \in  F}a - \alpha x_0  \|      & < \epsilon                                    \\
@@ -110,7 +110,7 @@ Because \(\epsilon\) was arbitrary, we conclude that \(\sum_{x \in A \cup B}\to 
 Let's start by proving the following proposition:
 
 \begin{proposition}
-    Any converging \(\sum_{a \in  A}a \to x\)  of positive numbers has at most a countable number of non zero elements. That is, \(\sum_{a \in A}x = \sum_{i \in  \mathbb{N}}a_i \), meaning that they converge to the same value \(x\).
+    Any converging \(\sum_{a \in  A}a \to x\)  of positive numbers has at most a countable number of non-zero elements. That is, \(\sum_{a \in A}x = \sum_{i \in  \mathbb{N}}a_i \), meaning that they converge to the same value \(x\).
 \end{proposition}
 \begin{proof}
     Say that the net converges to \(M\), i.e. \(\sum_{a \in  A} a = M <\infty  \) where for every \(a \in A, a>0\). Consider now the sets \(S_n = \{ a \in  A | a> \frac{1}{n} \} \), then
@@ -122,12 +122,12 @@ Let's start by proving the following proposition:
     \begin{equation}
         \# \{ a \in  A | a>0 \}= \# S = \# \bigcup_{n=\mathbb{N}}^{\infty} S_n
     \end{equation}
-    We conclude that \(A\) has at most countable number of non zero elements as countable union of finite sets.
+    We conclude that \(A\) has at most countable number of non-zero elements as a countable union of finite sets.
 \end{proof}
 
 
 Let's now prove the \((\implies) \) direction.
-Given the previously proven statement, we can rewrite the net as countable sum and thus define a corresponding sequence \(x_n = \sum_{i=0}^n a_{i}  \) where w.log. we associated every non zero element \(a\)  of \(A\) to an index \(i\) so that \(a_i = a\).
+Given the previously proven statement, we can rewrite the net as a countable sum and thus define a corresponding sequence \(x_n = \sum_{i=0}^n a_{i}  \) where w.log. we associated every non zero element \(a\)  of \(A\) to an index \(i\) so that \(a_i = a\).
 From standard analysis we obtain that every converging increasing sequence is bounded from above, i.e. there exists \(N \in  R\) so that \(x_n < N\) for every \(n\).
 It follows that for every finite \(F \subset I\)
 \begin{equation}
@@ -138,9 +138,9 @@ It follows that for every finite \(F \subset I\)
 We now prove the opposite implication \((\impliedby)\). Assume that \(\sup \left\{ \sum_{a \in F} a : F \in \mathcal{F} \right\} = x_0\). We proceed now by contradiction, suppose that \(\sum_{a \in  A}a \to  x_0 +t \) for an arbitrary \(t>0\).
 
 
-Let's define now what does it mean for a net to be increasing. Given a set \(F_0\), it holds that for every \(F > F_0\) we have that \(\sum_{a\in  F}a \geq  \sum_{a \in  F_0}a  \).
+Let's define now what it means for a net to increase. Given a set \(F_0\), it holds that for every \(F > F_0\) we have that \(\sum_{a\in  F}a \geq  \sum_{a \in  F_0}a  \).
 
-By the definition of net convergence for standard set inclusion as order, we obtain that the net \(\sum_{a\in  A}a \) is increasing.
+By defining net convergence for standard set inclusion as order, we obtain that the net \(\sum_{a\in  A}a \) is increasing.
 It follows that for every \(F\), \(\sum_{a \in  F} \leq  x_0 +t \). Moreover, since \(\sum_{a \in  A} a \to x_{0}+t  \), there exists and \(F_t\)  such that \(\forall F > F_t\) we have \(\| \sum_{a \in  F} a -x_{0}-t   \| < \frac{t}{2} \). It follows
 \begin{align*}
     \| \sum_{a \in  F} a -x_0 -t  \| & \leq 0                                   \\
@@ -172,7 +172,7 @@ We define the operator \(Q\) acting on \(x\) as such
 \end{equation}
 
 For \(Q\) to be equal to \(P_F\), \(Qx \) has to be the unique elements in \(H^{\prime} \) such that \(x - Qx \perp H^{\prime} \).
-We proceed by taking an orthogonal basis of \(H\) such that \(\mathcal{E} \subset B\), this basis is guaranteed to exist given the proposition 4.2.
+We proceed by taking an orthogonal basis of \(H\) such that \(\mathcal{E} \subset B\), this basis is guaranteed to exist given proposition 4.2.
 By theorem 4.13 again, by trivially noting that \(\bigvee H = H\), \(x\) can be represented as \(x=\sum_{e\in B}\langle x,e \rangle e  \).
 It follows that
 \begin{align*}
@@ -205,7 +205,7 @@ Where we used the orthogonality of \(P_F\) and the fact that the set \(F,G\) are
 % As this holds for arbitrary \(F, G\), proceeding the same fashion for \(P_G P_F\) completes the proof.
 
 \subsection{}
-Given an arbitrary finite family of disjoin orthonormal basis \((F_n)_{n \in \mathbb{N}}\).
+Given an arbitrary finite family of disjoint orthonormal basis \((F_n)_{n \in \mathbb{N}}\).
 \begin{align*}
     P_{\bigcup_{i=1}^{n} F_i } & = P_{\bigcup_{i=1}^{n-1}  \cup F_n} = P_{F_j \cup F_n} \\
 \end{align*}
@@ -255,7 +255,7 @@ Therefore, for \(\epsilon =\frac{1}{2}\) there exists no \(n>0\) such that the t
 \section{Exercise 3}
 \subsection{}
 \subsubsection{Inner product}
-We start by proving that \(H\) is indeed an inner product space given the definition of inner product \(\langle x, y \rangle = \sum_{i \in I} \langle x(i), y(i) \rangle_i, \quad x, y \in H.
+We start by proving that \(H\) is indeed an inner product space given the definition of the inner product \(\langle x, y \rangle = \sum_{i \in I} \langle x(i), y(i) \rangle_i, \quad x, y \in H.
 \)
 
 The first property we prove is the conjugate symmetry.
@@ -277,14 +277,14 @@ Then, for every \(F>F_0\)
     \| \lambda \langle x,y \rangle_F - \lambda x_0  \| & < \epsilon
     \| <\lambda x, y> _F - \lambda x_0 \|              & < \epsilon
 \end{align*}
-Where in the last equality we used the linearity of the norm in a finite dimensional setting.
+Where in the last equality we used the linearity of the norm in a finite-dimensional setting.
 
 \subsubsection{Positive semi-definiteness}
 This part is trivial as \(\langle x_i,x_i \rangle \) for any \(i \in I\). It follows that
 \begin{equation}
     \langle x,x \rangle = \sum_{i \in  I}\langle x_i,x_i \rangle  > 0.
 \end{equation}
-Then the so defined inner product satisfies the inner product properties.
+Then the so-defined inner product satisfies the inner product properties.
 
 \subsubsection{Well definiteness}
 Here we show that for every \(x,y \in  H\), \(\langle x,y \rangle \in  \mathbb{K}\).
@@ -294,10 +294,66 @@ Here we show that for every \(x,y \in  H\), \(\langle x,y \rangle \in  \mathbb{K
                         & \leq \sum_{i \in I}\| x_i \|\| y_i \|           \\ &\leq \sum_{i \in  I} \| x_i \|^{2} + \sum_{i \in  I}\| y_i \|^{2} < \infty.
 \end{align*}
 Where in the first inequality we used the Cauchy-Schwarz inequality.
-\subsection{Completeness}
+\subsubsection{Completeness}
 We now proceed to prove the completeness of \(H\).
+Let \((h_n)_{n \in  \mathbb{N}}\) be a Cauchy sequence, that is, for a certain \(N>0\), then for all \(n,m>N\) \(\| h_n - h_m \| <\epsilon \). Therefore, \(\| h_n(i) - h_m(i) \|<\epsilon  \) is also a Cauchy sequence in \(H_i\), thus it converges to the value say \(h(i)\). Consider then \(\lim_{n \to \infty}h_n(i) = h(i) \) the candidate element for the Cauchy sequence to converge to.
+
+Set \(N_0\) so that for every \(n,m >N_0\) \(\| h_n -h_m\|< \frac{\epsilon^2}{2} \). Thus, simply by the definition of \(h\) we get that for every \(i \in  I\) the following holds true.
+\begin{align*}
+    \lim_{m \to \infty}\| h_n(i) - h_m(i) \| = \| h_{n}(i)-h(i)  \| \\.
+\end{align*}
+Let \(G \subset I\) finite. Then
+\begin{align*}
+    \sum_{i \in  G}\| h_n(i)- h(i) \|^{2} & = \sum_{i \in  G} \lim_{m \to \infty} \| h_n(i) -h_m(i)\|                      \\
+                                          & = \lim_{m \to \infty} \sum_{i \in  G} \| h_n(i) -h_m(i)\|                      \\
+                                          & < \lim_{m \to \infty} \sum_{i \in  I} \| h_n(i) -h_m(i)\|                      \\
+                                          & = \lim_{m \to \infty} \| h_n(i) - h_m(i)\| <\frac{\epsilon^2}{2}  < \epsilon^2
+\end{align*}
+
+By the triangle inequality, we prove that \(h \in  H\).
+\begin{align*}
+    \| h \|^2 & = \sum_{i \in  I} \| h(i) \|^{2}                                                             \\
+              & \leq \sum_{ i \in  I} (\| h_n(i)- h(i)  \| +\| h_{n}(i)  \| ) ^{2}                           \\
+              & = \sum_{i \in I} \| h_n(i)-h(i) \|^{2} + \| h_n(i) \|^{2}  + \| h_n(i)- h(i) \| \| h_n(i) \| \\
+              & \leq  \| h_{n} - h  \| + \| h_n \|  + \| h_n-h \| ^{2}  + \| h_n \|^{2}  < \infty
+\end{align*}
+
+\subsection{}
+Let \(x_i = \sum_{k} \mathcal{E}_i^k \alpha _i^k \) for every \(x_i \in  H_i\) where the subscript \(k\) is used as second index instead of power.
+By definition, \(x  \in  H \implies  \bigcup_{i \in I}^{\infty} x_{i} = \sum_{ i \in I} \sum_{k} \mathcal{E}^k_i \alpha _i^k  \).
+This is sufficient to claim that \(\bigcup_{i \in I}\mathcal{E}_i \) is a basis in \(H\).
+
+\subsection{}
+Let's start by proving the first implication.
+
+Given that each \(H_i\) is countable, we take a countable basis \(B_i \subset H_i\). By the previous point, \(B\coloneqq \bigcup_{i=1}^{\infty} B_i\) is a basis for \(H\). Given that each \(B_I\) is countable and we take a countable union, it implies that \(B\) is also countable. Given that \(H\) has a countable basis \(B\) it implies that \(H\) is itself countable.
+
+Let's now prove the other implication. For every \(H_i \in  H\) take \(V_i \in  H_i\) open. Thus, \((V_i)_{i \in I}\) is a collection of disjoint open sets and it is uncountable, therefore \(H\) is not second countable, which is equivalent to not being separable as \(H\) is a metrizable space.
+
+\subsection{}
+Assume \(\sup_{i \in I}A_i =k<\infty \), and assume that \(\| A \|_{op} = k_i \). Then, for every \(x \in  H \) such that \(\| x \| \leq 1\) the following holds true.
+\begin{equation}
+    \| Ax \| ^2 = \sum_{i \in  I} \| A_i x_i \| ^{2} \leq \| k_i x_i \|^{2}.
+\end{equation}
+Then, \(\sup \| Ax \|^2 = \sup \sum_{i \in  I}k_i^{2}x_i^2 \leq k \sum_{i \in  I}x_i < \infty        \) where the supremum is taken over the elements \(x \) with \(\| x\|\leq 1 \).
+
+For the converse (\(\implies \) ), assume \(\exists j \in  I\) such that \(\| A_k \| = \infty  \), i.e \(\forall N >0, \exists  h_n  \) such that \(\| h_n \|\leq 1 \) and \(\| A_j h_n \| >N\).
+Take now \(\overline{x} \in  H \) such that \(\overline{x}(j)=h_n\) and \(\overline{x}(i) = 0  \) for all \(i\neq j\). It follows that \(\| x \|\leq 1 \) and that
+\begin{equation}
+    \| A \|  = \sup \{ \| Ax \| , \| x \|\leq 1  \} \geq \| A \overline{x}  \| = A_j x = \infty
+\end{equation}
 
 
+In order to prove the equality, we note from the first part that
+\begin{equation}
+    \sup \| Ax \| ^2 \leq  \sup _i \| A_i \| \sum_{i}\| x_i \|^2 = \sup \| A_i \| \| x \|.
+\end{equation}
+
+We now prove the other inequality.
+\begin{equation}
+    \| A_i x_i \|_{H_i}^2 \leq  \sum_{i_I} \| A_i x_i \|^{2} = \sum_{i \in I}\| A x\|^2_{H_i} = \| Ax \|^2 _H \leq  \| A \| ^2.
+\end{equation}
+Thus \(\sup _i \| Ai \|^2 \leq  \| A \| ^2 <\infty  \). Both inequalities conclude the desired equality.
 
 \section{Exercise 4}
 \subsection{}
@@ -308,12 +364,12 @@ Let's start noting how the operator \(S\) affects the inner product.
     \langle Sx,y \rangle = \langle (0,x_1  , \dots ),y \rangle = \sum_{i=1}^{\infty} x_i y_{i+1}
 \]
 We can see that the inner product with \(x\) and the adjoint on \(y\) must be equal  \(\langle x,S^*y \rangle=\sum_{i=1}^{\infty} x_i y_{i+1} \)
-which is the left shift operator
+which is the left-shift operator
 \[
     S^*(x_1,x_2,\dots ) = (x_2,x_3, \dots  )
 \]
 \subsection{}
-Let's compute now te concatenation of \(S\) and its adjoint.
+Let's compute now the concatenation of \(S\) and its adjoint.
 \[
     SS^*(x_1,x_2,\dots )=S(x_2,x_3, \dots  ) = (0,x_2,x_3, \dots  )
 \]
