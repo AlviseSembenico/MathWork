@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,12pt]{article} % This defines the style of your paper
 
 \usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
@@ -75,7 +76,7 @@
 The so defined time inversion process
 
 \begin{equation}
-    B(t; \alpha) = \begin{cases}
+    B(t, \alpha) = \begin{cases}
         t^{\alpha} W(1/t) & t > 0 \\
         0                 & t = 0
     \end{cases}
@@ -92,11 +93,12 @@ in order to be a Brownian Motion has to satisfy the following properties:
     \item for all \( t > s \) the increment \( W(t) - W(s) \) has the \textit{normal} distribution, with \( E[W(t) - W(s)] = 0 \) and \( E[(W(t) - W(s))^2] = t - s \)
 \end{enumerate}
 
-We start by looking at the property (1). It's clear from the property of the Brownian Motion \(W\) that \(B(t, \alpha )\) is continuous in \((0, \infty )\). The only point that we need to check the continuity is in fact at \(t=0\).
+We begin by verifying property (1). It's clear from the property of the Brownian Motion \(W\) that \(B(t, \alpha )\) is continuous in \((0, \infty )\). The only point that we need to check the continuity is in fact at \(t=0\).
 
 As the hint suggests, we start by computing the following for an arbitrary \(h>0, t>0\).
 \begin{align*}
-    \Cov\left[B(t+h, \alpha ), B(t, \alpha ) \right] & = \mathbb{E} \left[ (t+h)^{\alpha} t^{\alpha} W\left( \frac{1}{t} \right) W\left( \frac{1}{t+h} \right) \right] - \mathbb{E} \left[ B(t+h, \alpha) \right] \mathbb{E} \left[ B(t, \alpha) \right].
+    \Cov\left[B(t+h, \alpha), B(t, \alpha)\right]
+     & = \mathbb{E} \left[ (t+h)^{\alpha} t^{\alpha} W\left( \frac{1}{t} \right) W\left( \frac{1}{t+h} \right) \right] - \mathbb{E} \left[ B(t+h, \alpha) \right] \mathbb{E} \left[ B(t, \alpha) \right].
 \end{align*}
 We note that \( \mathbb{E} \left[ B(t, \alpha) \right] = t^{\alpha }\mathbb{E} \left[ W\left( \frac{1}{t} \right)  \right]=0 \). Thus, the right hand side can be simplified as follows.
 
@@ -147,7 +149,7 @@ Moreover, we can write the matrix on the right hand side as follows
 Upon defining the matrix \(D^n \) as follows
 
 \begin{equation}
-    D_n =
+    D^n =
     \begin{bmatrix}
         0 & \cdots  & 0 \\
           & I_{n-1} &
@@ -353,25 +355,66 @@ By using the independence of the increments of Ito integral, we have the expecta
                                                                                                                                          & \hspace{-7cm}= b^2 e^{-a(s+t)} \mathbb{E} \left[ \left(  \int_0^s e^{au} \, dW_u \right) ^2\right]                                                                                                   \\
 \end{align*}
 By Ito isometry again
+
 \begin{align*}
     b^2 e^{-a(s+t)} \mathbb{E} \left[ \left(  \int_0^s e^{au} \, dW_u \right) ^2\right] & = b^2 e^{-a(s+t)} \mathbb{E} \left[\int_0^s e^{2au} \, du \right] \\
                                                                                         & =b^2 e^{-a(s+t)} \frac{1}{2a}\left( e^{2at}-1 \right)             \\
                                                                                         & = \frac{b^{2} }{2a}\left( e^{-a(t-s)} - e^{-a(s+t)} \right)
+                                                                                        & = \frac{b^2}{2a} e^{-a(t-s)} \left( 1-e^{-2as} \right)
 \end{align*}
 
+When we take the limit $s$ to $\infty$, we rename $\tau=t-s$, we get $\frac{b^2}{2a} e^{ -a \tau}$.
+
+\subsection{interpretation}
+When we look at the expectation we see that it starts at $x_0$ and will decay or expand until it comes to $x_\infty$ in the infinite time limit.\\
+
+We note that we start with a variance of zero, that will reach $\frac{b}{2a}$ asymptotically.
+
+The correlation between $X(t)$ and $X(t+\tau)$ converges over time to the variance that is $\frac{b^2}{2a} e^{-a\tau}$.  This limit will exponentially decrease for larger $\tau$. This shows that the closer $X(t)$ and $X(t+\tau)$ are to each other, the bigger the correlation between the two. For larger separation time $\tau$, the correlation will diminish.
 
 
-\subsection{Interpretation and numerics}
+\subsection{Numerics}
+\subsubsection{Setup}
+For the numeric simulation, we set the following parameters:
+\begin{itemize}
+    \item \(x_{0} =0\)
+    \item \(x_{\inf }= 1 \)
+    \item \(a=b=\frac{1}{2}\)
+    \item \(T=10\)
+    \item \(dt=0.1\)
+\end{itemize}
+We generated 1000 sample paths, using the following formula obtained just by differentiation of the stochastic process.
+\begin{equation}
+    dX_t = - a(X_{t}-x_\infty  )dt +b dW_t.
+\end{equation}
+In order to use Euler-Maruyama, we adjusted the above with the following approximation
+\begin{equation}
+    X_{t+1} = X_t - a(X_{t-1}-x_\infty ) \Delta  t+ b W_{\Delta t}.
+\end{equation}
 
+\subsubsection{Results}
 The first thing to notice is the limit of the expectation. This is \(x_\infty \), therefore, the process will converge in mean to such value.
 
 To corroborate this, by running numerical experiments, we can see that indeed it converges in mean to \(x_\infty \). In the plot \ref{fig:my_image} we plotted only 10 sample paths, however, for the mean we use a sample size of 1000 to make it converge.
+
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{plots/ou_process.png} % Replace 'example-image' with the filename of your image
+    \includegraphics[width=1\textwidth]{plots/ou_process.png} % Replace 'example-image' with the filename of your image
     \caption{Plot showing some sample paths from the OU process, their mean and the \(x_\infty \) .}
     \label{fig:my_image}
 \end{figure}
+
+Regarding the variance, we plot in \ref{fig:covariance} the theoretical variance as well as the numeric one.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{plots/covariance.png} % Replace 'example-image' with the filename of your image
+    \caption{Plot showing the covariance between \(X_t\) and \(X_{t+\tau } \) for \(\tau >0\).}
+    \label{fig:covariance}
+\end{figure}
+
+
 
 
 \end{document}
