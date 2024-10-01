@@ -253,8 +253,49 @@ Take now \(\epsilon =\frac{1}{2}\), then, for for every \(n>N\)
 Therefore, for \(\epsilon =\frac{1}{2}\) there exists no \(n>0\) such that the the difference of the norm converges.
 
 \section{Exercise 3}
+\subsection{}
+\subsubsection{Inner product}
+We start by proving that \(H\) is indeed an inner product space given the definition of inner product \(\langle x, y \rangle = \sum_{i \in I} \langle x(i), y(i) \rangle_i, \quad x, y \in H.
+\)
 
+The first property we prove is the conjugate symmetry.
+For any \(x,y \in H\) and assume the net converges \(\langle x,y \rangle  \to  x_0\). Then, for a fixed \(\epsilon >0\), there exists an \(F_0\) such that for all \(F>F_0\)
+\begin{align*}
+    \| \overline{\langle x,y \rangle }_F - \overline{x_0}    \|                 & <\epsilon  \\
+    \| \overline{\sum_{i \in  F}\langle x_i,y_i \rangle } - \overline{x_0}   \| & < \epsilon \\
+    \| \sum_{i \in  F}\overline{\langle x_i,y_i \rangle }  -\overline{x_0}  \|  & < \epsilon \\
+    \| \sum_{i \in  F}\langle y_i, x_i \rangle -\overline{ x_0}  \|             & <\epsilon.
+\end{align*}
+we conclude that \(\overline{\langle x,y \rangle } \to \overline{x_0}  \).
 
+\subsubsection{Linearity in the first argument}
+We approach the proof in the same fashion as in the previous part. Assume \(\langle x,y \rangle \) converges in \(H\) to \(x_0\) .
+Then, for every \(F>F_0\)
+\begin{align*}
+    \| \langle x,y \rangle_F -x_0 \|                   & < \frac{\epsilon }{\lambda }                        \\
+    |\lambda |\| \langle x,y \rangle_F -x_0 \|         & < \frac{\epsilon}{|\lambda |} |\lambda | = \epsilon \\
+    \| \lambda \langle x,y \rangle_F - \lambda x_0  \| & < \epsilon
+    \| <\lambda x, y> _F - \lambda x_0 \|              & < \epsilon
+\end{align*}
+Where in the last equality we used the linearity of the norm in a finite dimensional setting.
+
+\subsubsection{Positive semi-definiteness}
+This part is trivial as \(\langle x_i,x_i \rangle \) for any \(i \in I\). It follows that
+\begin{equation}
+    \langle x,x \rangle = \sum_{i \in  I}\langle x_i,x_i \rangle  > 0.
+\end{equation}
+Then the so defined inner product satisfies the inner product properties.
+
+\subsubsection{Well definiteness}
+Here we show that for every \(x,y \in  H\), \(\langle x,y \rangle \in  \mathbb{K}\).
+\begin{align*}
+    \langle x,y \rangle & = \sum_{i \in  I}\langle x_i, y_i \rangle       \\
+                        & \leq  \sum_{i \in  I}|\langle x_i,y_i \rangle | \\
+                        & \leq \sum_{i \in I}\| x_i \|\| y_i \|           \\ &\leq \sum_{i \in  I} \| x_i \|^{2} + \sum_{i \in  I}\| y_i \|^{2} < \infty.
+\end{align*}
+Where in the first inequality we used the Cauchy-Schwarz inequality.
+\subsection{Completeness}
+We now proceed to prove the completeness of \(H\).
 
 
 

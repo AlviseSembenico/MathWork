@@ -1,4 +1,3 @@
-
 \documentclass[a4paper,12pt]{article} % This defines the style of your paper
 
 \usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
@@ -298,5 +297,81 @@ Putting everything together we obtain
 Which clearly converges to \(0\) as \(n\to  \infty \).
 
 \section{Exercise 3}
+\subsection{Mean and Variance}
+Given the stochastic process
+\begin{equation}
+    X(t) = x_{\infty} + e^{-at} (x_0 - x_{\infty}) + b \int_0^t e^{-a(t-s)} \, dW(s).
+\end{equation}
+We compute its expectation and variance as follows.
+\begin{align*}
+    \mathbb{E} \left[ X_t \right] & = x_\infty + e^{-at}(x_0 - x_\infty ) + b \mathbb{E} \left[ (f(t) \cdot W_s)_t \right] \\.
+\end{align*}
+Using the fact that the ito integral of an adapted (since it is deterministic) process with respect to the Brownian Motion has 0 expectation, it further simplifies to.
+\begin{equation}
+    \mathbb{E} \left[ X_t \right]  = x_\infty  + e^{-at}(x_0 -x_\infty ).
+\end{equation}
+We now take its limit for \(t\to \infty \) we obtain
+\begin{align*}
+    \lim_{t \to \infty} \mathbb{E} \left[ X_t \right] & = \lim_{t \to \infty} x_\infty + e^{-at}(x_{0- x_\infty } ) \\
+                                                      & = x_\infty .
+\end{align*}
+We now proceed onto computing the variance of the process and it's limit as \(t\to \infty \).
+\begin{align*}
+    \Var\left[X_t \right] & = \mathbb{E} \left[ (X_t - \mathbb{E} \left[ X_t \right])^2 \right]  = \mathbb{E} \left[ X_{t} ^{2}  \right] - \mathbb{E} \left[ X_t \right]^{2} \\
+                          & = b^2 \mathbb{E} \left[ \left( \int _0^t e^{-a(t-s)}dW_s \right)  \right].
+\end{align*}
+In the last equality we simply used the fact that the Ito integral has again zero expectation, therefore it annihilates all the terms that are multiplied to as they are bounded. We shall now use the Ito isometry.
+\begin{align*}
+    b^2 \mathbb{E} \left[ \left( \int _0^t e^{-a(t-s)}dW_s \right)  \right] & = b^{2} \mathbb{E} \left[ \int _0^t e^{-2a(t-s)}ds \right]   \\
+                                                                            & = b^2 e^{-2at}\mathbb{E} \left[ \int _0^t e^{-2as}ds \right] \\
+                                                                            & = \frac{b^{2} e^{-2at}}{2a}(e^{2at}+1)                       \\
+                                                                            & = \frac{b^{2} }{2a}(1- e^{-2at}).
+\end{align*}
+Thus
+\begin{equation}
+    \lim_{t \to \infty}  \Var\left[X_t \right] = \lim_{t \to \infty}\frac{b^{2} }{2a}(1- e^{-2at})  = \frac{b^{2} }{2a}.
+\end{equation}
+
+
+\subsection{Covariance}
+For a more general settings, we compute the variance between \(X_t\) and \(X_s\) where w.log. we assume \(t>s\).
+\begin{align*}
+    \Cov\left[X_s, X_t \right] & = b^2\Cov\left[\int _0^{s} e^{a(t-u)}dW_u,\int _0^t e^{-a(t-u)}dW_u   \right]                                                  \\
+                               & = \mathbb{E} \left[  \int _0^{s} e^{-a(t-u)}dW_u\int _0^t e^{-a(t-u)}dW_u \right]                                              \\
+                               & = b^2 e^{-a(s+t)} \mathbb{E} \left[   \int _0^{s} e^{au}dW_u\int _0^t e^{au}dW_u  \right]                                      \\
+                               & =b^2 e^{-a(s+t)} \mathbb{E} \left[   \int _0^{s} e^{au}dW_u \left(  \int _0^s e^{au}dW_u  + t _s^t e^{au}dW_u   \right)\right] \\
+\end{align*}
+By using the independence of the increments of Ito integral, we have the expectation of the product as the product of the expectation as follows.
+% \begin{align*}
+%     b^2 e^{-a(s+t)} \mathbb{E} \left[   \int _0^{s} e^{au}dW_u \left(  \int _0^s e^{au}dW_u & + t _s^t e^{au}dW_u   \right)\right]  =                                                                                                           \\
+%                                                                                                 & = b^2 e^{-a(s+t)} \mathbb{E} \left[    \int _0^s e^{au}dW_u  + t _s^t e^{au}dW_u   \right] \mathbb{E} \left[   \int _0^{s} e^{au}dW_u \right] \\
+% \end{align*}
+\begin{align*}
+    b^2 e^{-a(s+t)} \mathbb{E} \left[ \int_0^{s} e^{au} \, dW_u \left( \int_0^s e^{au} \, dW_u + \int_s^t e^{au} \, dW_u \right) \right] & =                                                                                                                                                                                                    \\
+                                                                                                                                         & \hspace{-7cm}= b^2 e^{-a(s+t)} \mathbb{E} \left[ \left(  \int_0^s e^{au} \, dW_u \right) ^2 + \int_s^t e^{au} \, dW_u  \int_0^{s} e^{au} \, dW_u  \right]                                            \\
+                                                                                                                                         & \hspace{-7cm}= b^2 e^{-a(s+t)} \left(  \mathbb{E} \left[ \left(  \int_0^s e^{au} \, dW_u \right) ^2\right] +  \mathbb{E} \left[ \int_s^t e^{au} \, dW_u  \int_0^{s} e^{au} \, dW_u  \right]  \right) \\
+                                                                                                                                         & \hspace{-7cm}= b^2 e^{-a(s+t)} \mathbb{E} \left[ \left(  \int_0^s e^{au} \, dW_u \right) ^2\right]                                                                                                   \\
+\end{align*}
+By Ito isometry again
+\begin{align*}
+    b^2 e^{-a(s+t)} \mathbb{E} \left[ \left(  \int_0^s e^{au} \, dW_u \right) ^2\right] & = b^2 e^{-a(s+t)} \mathbb{E} \left[\int_0^s e^{2au} \, du \right] \\
+                                                                                        & =b^2 e^{-a(s+t)} \frac{1}{2a}\left( e^{2at}-1 \right)             \\
+                                                                                        & = \frac{b^{2} }{2a}\left( e^{-a(t-s)} - e^{-a(s+t)} \right)
+\end{align*}
+
+
+
+\subsection{Interpretation and numerics}
+
+The first thing to notice is the limit of the expectation. This is \(x_\infty \), therefore, the process will converge in mean to such value.
+
+To corroborate this, by running numerical experiments, we can see that indeed it converges in mean to \(x_\infty \). In the plot \ref{fig:my_image} we plotted only 10 sample paths, however, for the mean we use a sample size of 1000 to make it converge.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\textwidth]{plots/ou_process.png} % Replace 'example-image' with the filename of your image
+    \caption{Plot showing some sample paths from the OU process, their mean and the \(x_\infty \) .}
+    \label{fig:my_image}
+\end{figure}
+
 
 \end{document}
