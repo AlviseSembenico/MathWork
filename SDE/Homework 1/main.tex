@@ -231,8 +231,8 @@ What is left to prove is the convergence in \(L_2\) of the right hand side, i.e.
 \end{equation}
 Using the linearity of the integral, we can rewrite it as follows
 \begin{align*}
-    \mathbb{E} \left[ \left( \sum_{n=1}^{N}  \int _{t_{n-1}}^{t_n} W(t)dt-\sum_{n=1}^{N-1} W(t_n) (t_n - t_{n-1}) \right) ^2  \right] & = \mathbb{E} \left[ \left(   \sum_{n=1}^{N-1}  \int _{t_{n-1}}^{t_n} W(t)-W(t_n)dt  \right)^2 \right] \\
-                                                                                                                                      & =\sum_{n=0}^{N-1} \mathbb{E} \left[ \left(     \int _{t_{n-1}}^{t_n} W(t)-W(t_n) dt \right)^2\right]  \\
+    \mathbb{E} \left[ \left( \sum_{n=0}^{N-1}  \int _{t_{n}}^{t_n+1} W(t)dt-\sum_{n=1}^{N-1} W(t_n) (t_n - t_{n-1}) \right) ^2  \right] & = \mathbb{E} \left[ \left(   \sum_{n=0}^{N-1}  \int _{t_{n}}^{t_{n+1}} W(t)-W(t_n)dt  \right)^2 \right] \\
+                                                                                                                                      & =\sum_{n=0}^{N-1} \mathbb{E} \left[ \left(     \int _{t_{n}}^{t_{n+1}} W(t)-W(t_n) dt \right)^2\right]  \\
                                                                                                                                       & = \sum_{n=0}^{N-1} \mathbb{E} \left[  e_n ^2 \right].
 \end{align*}
 Where \(e_n\) is n-th error term. Moreover, in the last equation we dropped the cross terms  since \(\mathbb{E} \left[ e_i e_j \right] = 0 \) by the properties of the Brownian motion.
