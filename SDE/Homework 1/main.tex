@@ -61,7 +61,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \begin{center} % Everything within the center environment is centered.
-    {\Large \bf Homework 1}
+    {\Large \bf Homework 1 Rework}
 \end{center}
 
 \vspace{0.4cm}
@@ -134,7 +134,7 @@ Moreover, we can write the matrix on the right hand side as follows
         \vdots                        \\
         W\left( \frac{1}{t_n} \right)
     \end{bmatrix}
-    = O^n +
+    = 0^n +
     \begin{bmatrix}
         \frac{1}{\sqrt{t_1}} \\
         \vdots               \\
@@ -176,21 +176,36 @@ It follows that \(B^{\prime} = A \mathcal{W}- D^{n}A \mathcal{W}  =(I-D^n)A \mat
     \vdots                        \\
     W\left( \frac{1}{t_n} \right)
 \end{bmatrix}\).
-From this representation we get that \(B^{\prime} \) is a multivariate Gaussian Since, implying that each marginal is also Gaussian.
-Moreover, we have that \(\mathbb{E} \left[ B_{t_n}- B_{t_{b_{n-1}}} = 0  \right]\). Moreover, we have that
+From this representation we get that \(B^{\prime} \) is multivariate Gaussian distributed, implying that each marginal is also Gaussian.
+Moreover, we have that \(\mathbb{E} \left[ B_{t_n}- B_{t_{n-1}} = 0  \right]\). Moreover, we have that
 \begin{align*}
     \Cov\left[B^{\prime}_i, B^{\prime} _j \right]
-     & = \mathbb{E} \left[ B_{i}^{\prime}B^{\prime} _j   \right]                                                                                                                                                                                                                                                                                                                       \\
-     & = \mathbb{E} \left[ \left( W\left( \frac{1}{t_i} \right) - W\left( \frac{1}{t_{i-1}} \right) \right) \left( W\left( \frac{1}{t_j} \right) - W\left( \frac{1}{t_{j-1}} \right) \right) \right]                                                                                                                                                                                   \\
-     & = \mathbb{E} \left[ W\left( \frac{1}{t_i} \right) W\left( \frac{1}{t_j} \right) \right] - \mathbb{E} \left[ W\left( \frac{1}{t_i} \right) W\left( \frac{1}{t_{j-1}} \right) \right] - \mathbb{E} \left[ W\left( \frac{1}{t_{i-1}} \right) W\left( \frac{1}{t_j} \right) \right] + \mathbb{E} \left[ W\left( \frac{1}{t_{i-1}} \right) W\left( \frac{1}{t_{j-1}} \right) \right] \\
+     & = \mathbb{E} \left[ B_{i}^{\prime}B^{\prime} _j   \right]                                                                                                                                             \\
+     & = \mathbb{E} \left[ \left( W\left( \frac{1}{t_i} \right) - W\left( \frac{1}{t_{i-1}} \right) \right) \left( W\left( \frac{1}{t_j} \right) - W\left( \frac{1}{t_{j-1}} \right) \right) \right]         \\
+     & = \mathbb{E} \left[ W\left( \frac{1}{t_i} \right) W\left( \frac{1}{t_j} \right) \right] - \mathbb{E} \left[ W\left( \frac{1}{t_i} \right) W\left( \frac{1}{t_{j-1}} \right) \right] -                 \\
+     & \quad\quad -\mathbb{E} \left[ W\left( \frac{1}{t_{i-1}} \right) W\left( \frac{1}{t_j} \right) \right] + \mathbb{E} \left[ W\left( \frac{1}{t_{i-1}} \right) W\left( \frac{1}{t_{j-1}} \right) \right] \\
      & = 0
 \end{align*}
 
 From the previous point, by taking the limit of the mesh \(\mathcal{P}\), we have that for every \(a_t\) and \(t \in  [0, \infty ) \cap \mathbb{Q}\), the following holds true: \(P(\{ B(t) <a_t , a_t \in  \mathbb{R},t \in  [0, \infty ) \cap \mathbb{Q} \} ) = P(\{ B(t) <a_t , a_t \in  \mathbb{R},t \in  [0, \infty ) \cap \mathbb{Q} \} )\).
-To conclude the proof that \(B\) is continuous at \(t=0\) we use the following proposition.
-\begin{proposition}
-    Let \((x_n)_{n \in  \mathbb{Q}}\) with \(x_n \to 0\) and let \( X(x_n) \xrightarrow{d} Y(x_n) \), \( Y(x_n) \to c \) a.s.. Then, \( X(x_n) \to c \) a.s..
-\end{proposition}
+% \begin{proposition}
+%     Let \((x_n)_{n \in  \mathbb{Q}}\) with \(x_n \to 0\) and let \( X(x_n) \xrightarrow{d} Y(x_n) \), \( Y(x_n) \to c \) a.s.. Then, \( X(x_n) \to c \) a.s..
+% \end{proposition}
+
+To conclude the proof that \(B\) is continuous at \(t=0\) look at the quantity \(P[\lim_{t \to 0} B_t=0] \).
+Let \(Q\) be the measure of the process \(B\). We have that
+\begin{equation}
+    P[\lim_{t \to 0} B_t=0] = Q(x \in  C^0(0,1]: \lim_{t \to 0}x(t)=0 ).
+\end{equation}
+Moreover, we can write the event in the following way
+\begin{equation}
+    \{ x \in  C^0(0,1]: \lim_{t \to 0}x(t)=0  \}  = \bigcup_{t\in Q \cap (0, \infty )}^{\infty} \bigcap_{\epsilon \in  Q \cap (0,\infty )}^{\infty} \{ x: |x(t)| < \epsilon \}.
+\end{equation}
+Using now the fact that the two measures agree on the rationals, we can rewrite it as
+\begin{equation}
+    Q(x \in  C^0(0,1]: \lim_{t \to 0}x(t)=0 ) = \overline{W} (x \in  C^0(0,1]: \lim_{t \to 0}x(t)=0 )= P[\lim_{t \to 0} B_t=0]=1.
+\end{equation}
+Where \(\overline{W}\) is the Wiener measure. It follows that the process \(B\) is continuous at \(t=0\).
 
 
 
@@ -200,45 +215,45 @@ In this exercise we will prove the following equality:
 \begin{equation}
     \int_0^T t \, dW(t) = T W(T) - \int_0^T W(t) \, dt
 \end{equation}
-Look at the left hand side, by taking it's forward Euler we obtain
+Looking at the left hand side, by taking it's forward Euler we obtain
 \begin{equation}
-    I_1 = \int _0^T t dW(t) = \sum_{n=0}^{N-1} t_n (W(t_{n-1} -W(t_n) )).
+    I_1 = \int _0^T t dW(t) = \sum_{n=0}^{N-1} t_n (W(t_{n+1} -W(t_n) )).
 \end{equation}
 Applying the hint, i.e. using the Abel's summation by parts we get
 \begin{align*}
-    \sum_{n=0}^{N-1} t_n (W(t_{n-1} -W(t_n) )) & = t_N W(t_N) - t_0 W(t_0) - \sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1}) \\
-                                               & = T W(T)  - \sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1}).
+    \sum_{n=0}^{N-1} t_n (W(t_{n+1} -W(t_n) )) & = t_N W(t_N) - t_0 W(t_0) - \sum_{n=1}^{N-1} W(t_n) (t_n - t_{n-1}) \\
+                                               & = T W(T)  - \sum_{n=1}^{N-1} W(t_n) (t_n - t_{n-1}).
 \end{align*}
 What is left to prove is the convergence in \(L_2\) of the right hand side, i.e. the following equation.
 \begin{equation}
-    \lim_{n \to \infty} \mathbb{E} \left[ \left(   \int _0^T W(t)dt-\sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1})  \right)^2\right] =0.
+    \lim_{n \to \infty} \mathbb{E} \left[ \left(   \int _0^T W(t)dt-\sum_{n=1}^{N-1} W(t_n) (t_n - t_{n-1})  \right)^2\right] =0.
 \end{equation}
-Let's fix \(t_n - t_{n-1} = \Delta t\) for every \(n\geq 0\).
 Using the linearity of the integral, we can rewrite it as follows
 \begin{align*}
-    \mathbb{E} \left[ \left( \sum_{n=0}^{N-1}  \int _{t_{n-1}}^{t_n} W(t)dt-\sum_{k=1}^{N-1} W(t_k) (t_k - t_{k-1}) \right) ^2  \right] & = \mathbb{E} \left[ \left(   \sum_{n=0}^{N-1}  \int _{t_{n-1}}^{t_n} W(t)-W(t_n)dt  \right)^2 \right] \\
-                                                                                                                                        & =\sum_{n=0}^{N-1} \mathbb{E} \left[  \int _{t_{n-1}}^{t_n} W(t)-W(t_n) dt \right]                     \\
-                                                                                                                                        & = \sum_{n=0}^{N-1} \mathbb{E} \left[  e_n ^2 \right].
+    \mathbb{E} \left[ \left( \sum_{n=1}^{N}  \int _{t_{n-1}}^{t_n} W(t)dt-\sum_{n=1}^{N-1} W(t_n) (t_n - t_{n-1}) \right) ^2  \right] & = \mathbb{E} \left[ \left(   \sum_{n=1}^{N-1}  \int _{t_{n-1}}^{t_n} W(t)-W(t_n)\Delta _{t_n}dt  \right)^2 \right] \\
+                                                                                                                                      & =\sum_{n=0}^{N-1} \mathbb{E} \left[ \left(     \int _{t_{n-1}}^{t_n} W(t)-W(t_n)\Delta _{t_n} dt \right)^2\right]  \\
+                                                                                                                                      & = \sum_{n=0}^{N-1} \mathbb{E} \left[  e_n ^2 \right].
 \end{align*}
 Where \(e_n\) is n-th error term. Moreover, in the last equation we dropped the cross terms  since \(\mathbb{E} \left[ e_i e_j \right] = 0 \) by the properties of the Brownian motion.
 
 Next, we compute \(\mathbb{E} \left[ e_n^2 \right]\) for every \(n \geq 0\).
 
 \begin{align*}
-    \mathbb{E} \left[ e_n^2 \right] & = \mathbb{E} \left[ \left(  \int _{t_n}^{t_{n-1}} W(t)- W(t_n)dt  \right)^2\right]                                                         \\
-                                    & = \mathbb{E} \left[  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \left( W(t)-W(t_n)dt \right)\left( W(s)- W(t_n)ds \right)   \right]     \\
-                                    & = \mathbb{E} \left[  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \left( W(t)-W(t_n) \right)\left( W(s)- W(t_n) \right) dt ds   \right] . \\
+    \mathbb{E} \left[ e_n^2 \right] & = \mathbb{E} \left[ \left(  \int _{t_n}^{t_{n+1}} W(t)- W(t_n)dt  \right)^2\right]                                                         \\
+                                    & = \mathbb{E} \left[  \int _{t_n}^{t_{n+1} } \int _{t_n}^{t_{n+1} } \left( W(t)-W(t_n)dt \right)\left( W(s)- W(t_n)ds \right)   \right]     \\
+                                    & = \mathbb{E} \left[  \int _{t_n}^{t_{n+1} } \int _{t_n}^{t_{n+1} } \left( W(t)-W(t_n) \right)\left( W(s)- W(t_n) \right) dt ds   \right] . \\
 \end{align*}
-Where we used twice Fubini's Theorem. We also use Fubini for the following equality.
+Where we used twice Fubini's Theorem as the integrands are squared integrable functions.  We also use Fubini for the following equality as the expectation is finite for arbitrary Brownian motion.
 
 \begin{align*}
-    \mathbb{E} \left[  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \left( W(t)-W(t_n) \right)\left( W(s)- W(t_n) \right) dt ds   \right] & =  \int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \mathbb{E} \left[  \left( W(t)-W(t_n) \right)\left( W(s)- W(t_n) \right) dt ds   \right] \\
-                                                                                                                                           & =\int _{t_n}^{t_{n-1} } \int _{t_n}^{t_{n-1} } \min (t,s) - t_k dt ds                                                                     \\                                                            & = \frac{1}{3}(\Delta t)^3.
+    \mathbb{E} \left[  \int _{t_n}^{t_{n+1} } \int _{t_n}^{t_{n+1} } \left( W(t)-W(t_n) \right)\left( W(s)- W(t_n) \right) dt ds   \right] =                         &                                                                                          \\
+    =  \int _{t_n}^{t_{n+1} }                                                                                                                 \int _{t_n}^{t_{n+1} } & \mathbb{E} \left[  \left( W(t)-W(t_n) \right)\left( W(s)- W(t_n) \right) dt ds   \right] \\
+                                                                                                                                                                     & =\int _{t_n}^{t_{n+1} } \int _{t_n}^{t_{n+1} } \min (t,s) - t_k dt ds                    \\                                                            & = \frac{1}{3}(\Delta t_{\text{max}})^3.
 \end{align*}
 Finally, by summing all the values, we get
 
 \begin{equation}
-    \sum_{n=0}^T  \mathbb{E} \left[ e_n \right] = \sum_{n=0}^t frac{1}{3} (\Delta  t)^3  = \frac{T^3}{n^2}.
+    \sum_{n=0}^T  \mathbb{E} \left[ e_n \right] = \sum_{n=0}^t \frac{1}{3} (\Delta  t_{\text{max}})^3  < \frac{T^3}{n}.
 \end{equation}
 It follows that by letting \(n\) go to infinity, the Forward Euler converges in \(L_2\).
 

@@ -1,0 +1,625 @@
+
+\documentclass[a4paper,12pt]{article} % This defines the style of your paper
+
+\usepackage[top = 2.5cm, bottom = 2.5cm, left = 2.5cm, right = 2.5cm]{geometry} 
+
+% fonts
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mathtools}
+   
+% The following two packages - multirow and booktabs - are needed to create nice looking tables.
+\usepackage{multirow} % Multirow is for tables with multiple rows within one cell.
+\usepackage{booktabs} % For even nicer tables.
+
+% The default setting of LaTeX is to indent new paragraphs. This is useful for articles. But not really nice for homework problem sets. The following command sets the indent to 0.
+\usepackage{setspace}
+\setlength{\parindent}{0in}
+
+% Package to place figures where you want them.
+\usepackage{float}
+
+% The fancyhdr package let's us create nice headers.
+\usepackage{fancyhdr} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header (and Footer)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{fancy} % With this command we can customize the header style.
+
+\fancyhf{} % This makes sure we do not have other information in our header or footer.
+
+\lhead{\footnotesize Numerics for SDE}% \lhead puts text in the top left corner. \footnotesize sets our font to a smaller size.
+\newtheorem{proposition}{Proposition}
+
+%\rhead works just like \lhead (you can also use \chead)
+\rhead{\footnotesize Alvise Sembenico, Tamira Lopes (group 9)}%, Lastname 2 (\& Lastname 3)} %<---- Fill in your lastnames.
+
+% Similar commands work for the footer (\lfoot, \cfoot and \rfoot).
+% We want to put our page number in the center.
+\cfoot{\footnotesize \thepage} 
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\DeclareMathOperator{\diag}{diag}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands
+\newcommand{\comment}[1]{%
+  \text{\phantom{(#1)}} \tag{#1}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{center} % Everything within the center environment is centered.
+    {\Large \bf Homework 2}
+\end{center}
+
+\vspace{0.4cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE HOMEWORK
+% Can be written right here or in the dedicated files
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\onehalfspacing
+\section{Exercise 1}
+Given the following SDE
+\begin{equation}
+    dX_t =A X_t dt
+\end{equation}
+with \(X_t \in \mathbb{R}^2\) and two eigenvalues \(\lambda_1=1\) and \(\lambda _2=10^5\).
+The backward Euler method is given by
+\begin{align}
+    X_{n+1} & =X_n + A  X_{n+1} \Delta t    \\
+            & = X_n(I - A \Delta t)^{-1}  .
+\end{align}
+On the other hand, we formulate the forward Euler method as
+\begin{align}
+    X_{n+1} & = X_n + A X_n \Delta t \\
+            & = X_n(I + A \Delta t).
+\end{align}
+
+We know the solution of the SDE is given by
+\begin{equation}
+    X_t = c_1 e^{\lambda_1 t} V_1 + c_2 e^{\lambda_2 t} V_2.
+\end{equation}
+We will study the behavior of the two methods and evaluating it against the real solution.
+\subsection{Forward Euler}
+Note that in this context we will assume that \(A\) is diagonalizable, i.e. there exists and invertible matrix such that \(A = D \Lambda_A D^{-1} \) where \(\Lambda _A = \diag  (\lambda _1, \lambda _2)\) .  Moreover, we will denote \((I+A) = D \Lambda D ^{-1} \) since \(I+A=D I D ^{-1} + U \Lambda_A U ^{-1} = D (I+ \Lambda _A)D ^{-1} \).
+
+We can then write the forward Euler as follows.
+\begin{align*}
+    X_{n+1}  = X_n (I+ A \Delta t) = X_{n-1}(I+A \Delta t)^{2} & = X_0 (I+A \Delta t)^n                                       \\
+                                                               & = X_0 (U (I+ \diag(\lambda_1, \lambda_2) \Delta t)^n U^{-1})
+\end{align*}
+Looking at entry wise of \((I+  \diag(\lambda_1, \lambda_2) \Delta t)^n \), we have that \((1+\lambda_1 \Delta t)^n\) should go to infinity and \((1+\lambda_2 \Delta t)^n\) should go to zero. Note in fact that since \(\Delta t= \frac{T}{n}\), we get
+\begin{equation}
+    \left(  1+\lambda_1 \frac{T}{n} \right)^n \to e^{\lambda _1 T}.
+\end{equation}
+While the divergent case works for any choice of \(\Delta t\), we need to look at the convergent case. We have that
+\((1+\lambda _2 \Delta t)^n \) should converge to zero. This is true if and only if \( |1+ \lambda _2 \Delta t| <1 \). This is equivalent to
+\begin{equation}
+    \Delta t < 2 \times 10^{-5}.
+\end{equation}
+\subsection{Backward Euler}
+In a similar fashion, we can write the backward Euler as follows.
+\begin{equation}
+    X_{n-1} = X_n (I-A \Delta t)^{-1} = X_0 (I-A \Delta t)^{-n}.
+\end{equation}
+Looking at the case for \(\lambda _1 >0\) we get that
+\begin{equation}
+    (1-\lambda _1 \Delta t)^{-n} \to \infty  \iff (1-\lambda _1 \Delta t)^n \to 0.
+\end{equation}
+Thus the condition corresponds to \(|1-\lambda _1\Delta t|<1\)  so \(\Delta t \leq \frac{2}{\lambda 1}\).
+For the case \(\lambda _2 <0 \) we have that
+\begin{equation}
+    (1-\lambda _2 \Delta t)^{-n} \to 0  \iff (1-\lambda _2 \Delta t)^n \to \infty.
+\end{equation}
+This conditions is always satisfied since \(1+\lambda_2 \Delta t >1 \) for any choice of \(\Delta t\).
+We observe that the backward Euler method is always stable for any choice of \(\Delta t<2\) which is a much more relaxed condition than the forward Euler method.
+\subsection{Numeric results}
+In the series of plot we show the differences between the forward and Euler method. As corroborated by the theoretical part, the most ill behaved part is the one for the negative eigenvalue.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_10_steps_lambda_1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_10_steps_lambda_2.png}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/backward_euler_10_steps_lambda_1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/backward_euler_10_steps_lambda_2.png}
+    \end{minipage}
+
+    \caption{Comparison of the two methods for 10 steps.}
+\end{figure}
+
+% add comparisong for 1000 steps
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_1000_steps_lambda_1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_1000_steps_lambda_2.png}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/backward_euler_1000_steps_lambda_1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/backward_euler_1000_steps_lambda_2.png}
+    \end{minipage}
+
+    \caption{Comparison of the two methods for 1000 steps.}
+\end{figure}
+
+% add comparison for 1000000 steps
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_1000000_steps_lambda_1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_1000000_steps_lambda_2.png}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/backward_euler_1000000_steps_lambda_1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/backward_euler_1000000_steps_lambda_2.png}
+    \end{minipage}
+
+    \caption{Comparison of the two methods for 1000000 steps.}
+\end{figure}
+
+
+\newpage
+\subsection{Ito SDE}
+Modelling the following SDE
+\begin{equation}
+    dX_t = a X_t \, dt + b X_t \, dW_t,
+\end{equation}
+by simply applying the Backward Euler method we get
+\begin{equation}
+    X_{n+1} = X_n (1 - a \Delta t - b dW_{n+1} )^{-1}.
+\end{equation}
+The problem we see is that \( (1 - a \Delta t - b W_{n+1} )\) can be zero with a positive probability, therefore the numeric simulation will not be stable. This is indeed the case for \(dW_n =  \frac{a \Delta t -1}{b}\). Although the probability in the theoretical case is zero, for numeric simulation it is not. Moreover, another ill case is when \((1 - a \Delta t - b W_{n+1} )\) is small, therefore blowing up the numerics.
+A solution for this can be to combine the forward and backward Euler, namely considering the backward Euler for the drift and the forward Euler for the diffusion term. This is known as the semi-implicit Euler method. The method is given by
+\begin{equation}
+    X_{n+1} = X_n (1 - a \Delta t)^{-1} + b X_n dW_n  = X_{n} \left( \frac{1+bdW_n}{1-a \Delta t} \right)  .
+\end{equation}
+In this case, one can note that the drift term is stable for an adequate choice of \(\Delta t\) while the diffusion term is always stable.
+
+Note that the original SDE is the standard geometric Brownian motion, which is known to have a closed form solution. The solution is given by
+\begin{equation}
+    X_t = X_0 e^{(a-\frac{b^2}{2})t + bW_t}.
+\end{equation}
+
+\subsubsection{Numeric results}
+In order to evaluate our scheme, we ran a simulation for 1000 samples and we compared the mean and variance against the theoretical values. Recognizing the SDE as the standard geometric Brownian motion, we have that equation that solves the SDE is given by
+\begin{equation}
+    X_t = X_0 e^{(a-\frac{b^2}{2})t + bW_t}.
+\end{equation}
+Moreover, we have that the mean and variance are given by
+\begin{equation}
+    \mathbb{E} \left[ X_t \right] = X_0 e^{at} \quad \text{and} \quad \Var \left[ X_t \right] = X_0^2 e^{2at} (e^{b^2t}-1).
+\end{equation}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{plots/semi_implicit.png} % Replace 'example-image' with the filename of your image
+    \caption{Numerical mean and variance of the semi-implicit Euler method against the theoretical values.}
+    \label{fig:covariance}
+\end{figure}
+
+
+\newpage
+
+\section{Exercise 2}
+We want to approximate
+$$\mathrm{d}S_t = r S_t \, \mathrm{d}t + \sigma S_t \, \mathrm{d}W_t$$
+using the Euler Forward method.
+
+\subsection{a}
+We want to compute
+$$\epsilon \equiv \mathbb{P}(S_{n+1} < 0 \mid S_n = s)$$
+as a function of $\Delta t= \frac{T}{N}$, where $T$ is the total time.
+
+When we use the Euler forward method, the discretization of the differential equation is
+
+\begin{equation}
+    S_{n+1} = (1 + r \Delta t + \sigma \Delta W_n) S_n.
+\end{equation}
+
+We use three cases to calculate the value for $\epsilon$.
+
+\subsubsection{Case 1: $S_n = s = 0$}
+If $S_n = 0$, then we have
+\begin{equation}
+    \epsilon = P(S_{n+1} < 0 \mid S_n = 0) = P((1 + r \Delta t + \sigma \Delta W_n) \cdot 0 < 0) = 0
+\end{equation}
+Trivially, we have that $\epsilon = 0$ as the solution is always non-negative.
+
+\subsubsection{Case 2: $S_n = s > 0$}
+We have that $S_n > 0$. This gives us the following for $S_{n+1}$:
+
+\begin{align}
+    \epsilon  = P(S_{n+1} < 0 \mid S_n = s) & = P((1 + r \Delta t + \sigma \Delta W_n) S_n < 0) \\
+                                            & = P(1 + r \Delta t + \sigma \Delta W_n < 0)       \\
+\end{align}
+
+Now we solve this inequality for $\Delta W_n$:
+\begin{equation}
+    P\left(  \Delta W_n < -\frac{1 + r \Delta t}{\sigma} \right).
+\end{equation}
+Since we know that $W_n$ follows a normal distribution with mean $0$ and variance $\Delta t$, i.e., $W_{n} \sim \mathcal{N}(0, \sqrt{\Delta t})$, we get the following expression for $\epsilon$:
+
+\begin{equation}
+    \epsilon = \mathbb{P}\left(\Delta W_n < -\frac{1 + r \Delta t}{\sigma}\right).
+\end{equation}
+
+We introduce the stochastic variable $Z = \frac{\Delta W_n}{\sqrt{\Delta t}}$. This follows a standard normal distribution, $Z \sim \mathcal{N}(0, 1)$. Therefore, we can express the previous probability as
+
+\begin{equation}
+    \epsilon = \mathbb{P}\left(Z < - \frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right).
+\end{equation}
+
+Using the cumulative distribution function (CDF) of the normal distribution, we rewrite this as:
+
+\begin{equation}
+    \epsilon = \Phi\left(- \frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right) = 1 - \Phi\left(\frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right).
+\end{equation}
+
+\subsubsection{Case 3: $S_n = s < 0$}
+When $S_n$ is already negative, from the Euler forward equation for $S_{n+1}$, we get, just like in case 2, that
+$$\epsilon =P(1 + r \Delta t + \sigma \Delta W_n > 0).$$
+
+Thus, we have
+$$\epsilon =P\left(\Delta W_n > - \frac{1 + r \Delta t}{\sigma}\right).$$
+
+Using the fact that $W_n$ follows a normal distribution as in case 2, with $Z = \frac{\Delta W_n}{\sqrt{\Delta t}} \sim \mathcal{N}(0, 1)$, we get:
+
+\begin{align}
+    \epsilon & = \mathbb{P}\left(Z > - \frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right)      \\
+             & = 1 - \mathbb{P}\left(Z < - \frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right).
+\end{align}
+
+Using the CDF of the normal distribution $\Phi$, we get:
+
+\begin{equation}
+    \epsilon = \Phi\left(\frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right).
+\end{equation}
+
+\subsection{b}
+We want to show that:
+
+\[
+    \alpha = \mathbb{P}\left(\min_{1 \leq n \leq N} S_n < 0\right) = 1 - \mathbb{P}(S_1 > 0) \times \mathbb{P}(S_2 > 0 \mid S_1 > 0) \times \cdots \times \mathbb{P}(S_N > 0 \mid S_{N-1} > 0).
+\]
+
+For any $i$, we have that
+$$\mathbb{P}(S_{i+1} > 0 \mid S_i > 0) = 1 - \mathbb{P}(S_{i+1} < 0 \mid S_i > 0) = 1 - \Phi\left(- \frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right).$$
+
+So when we substitute this into the equation for $\alpha$:
+
+\[
+    \alpha = 1 - \left(1 - \Phi\left(- \frac{1 + r \Delta t}{\sigma \sqrt{\Delta t}}\right)\right)^N.
+\]
+
+\subsection{c}
+
+Since $\Delta t = \frac{T}{N}$, we have:
+
+\[
+    \sqrt{\Delta t} = \sqrt{\frac{T}{N}},
+\]
+
+which implies:
+
+\[
+    \frac{1}{\sigma \sqrt{\Delta t}} = \frac{1}{\sigma} \sqrt{\frac{N}{T}}.
+\]
+
+Let us define:
+
+\[
+    x = \frac{1}{\sigma} \sqrt{\frac{N}{T}}.
+\]
+
+Substituting this into the expression for $\alpha$, we get:
+
+\[
+    \alpha \approx 1 - \left[ \Phi(x) \right]^N.
+\]
+
+
+Using the following inequality for $x > 0$:
+
+\[
+    1 - \frac{\varphi(x)}{x} < \Phi(x),
+\]
+This gives us the approximation:
+
+\[
+    \Phi(x) \approx 1 - \frac{\varphi(x)}{x}.
+\]
+Where we used that \(\Phi (x) \to 1 \) as \(x\to \infty \).
+Substituting this approximation into the expression for $\alpha$:
+
+\[
+    \alpha \approx 1 - \left(1 - \frac{\varphi(x)}{x} \right)^N.
+\]
+
+For large $N$ and small $\frac{\varphi(x)}{x}$, we can use the approximation:
+
+\[
+    \left(1 - \frac{\varphi(x)}{x} \right)^N \approx e^{-N \frac{\varphi(x)}{x}}.
+\]
+
+Thus, $\alpha$ becomes:
+
+\[
+    \alpha \approx 1 - e^{-N \frac{\varphi(x)}{x}}.
+\]
+
+
+Since $e^{-N \frac{\varphi(x)}{x}}$ is small (because $N$ is large), we can use the approximation $\log(1 - y) \approx -y$ for small $y$. Therefore, by taking the log on both sides of the approximation, we get:
+
+\[
+    \alpha \approx N \frac{\varphi(x)}{x}.
+\]
+
+Taking the logarithm of both sides:
+
+\[
+    \log \alpha \approx \log \left( N \frac{\varphi(x)}{x} \right).
+\]
+
+Substitute the expression for $\varphi(x)$:
+
+\[
+    \log \alpha \approx \log N + \log \left( \frac{e^{-x^2 / 2}}{\sqrt{2\pi} x} \right).
+\]
+
+Simplifying:
+
+\[
+    \log \alpha \approx \log N - \frac{x^2}{2} - \log x - \frac{1}{2} \log(2\pi).
+\]
+
+Since $x^2 = \frac{N}{\sigma^2 T}$, we substitute to obtain:
+
+\[
+    \log \alpha \approx -\frac{N}{2 \sigma^2 T} + \log N - \log x - \frac{1}{2} \log(2\pi).
+\]
+
+For large $N$, the dominant term is $-\frac{N}{2 \sigma^2 T}$, so we can approximate:
+
+\[
+    \log \alpha \approx -\frac{N}{2 \sigma^2 T}.
+\]
+Thus
+\begin{equation}
+    \alpha \approx e^{-\frac{N}{2 \sigma^2 T}}.
+\end{equation}
+\subsection{d}
+Let $\eta$ be the probability that at least one of the $M$ paths does not satisfy the non-negativity condition. The probability for a single path to avoid hitting zero is $1 - \alpha$, so the probability that all paths avoid hitting zero is $(1 - \alpha)^M$. This means that:
+
+$$\eta = 1 - \mathbb{P}(\text{not a single path hits 0}) = 1 - (1 - \alpha)^M.$$
+
+We express $\alpha$ in terms of $\eta$ and $M$
+$$
+    \alpha= 1-(1-\eta)^\frac{1}{M}
+$$
+
+
+
+\subsection{e}
+We compute the \(\Delta  t \) as follows
+\begin{equation}
+    \log  \alpha  \approx -\frac{N}{2 \sigma ^2 T} = - \frac{1}{2 \sigma ^2 \Delta  t} .
+\end{equation}
+Thus
+\begin{equation}
+    \Delta t = -\frac{1}{2 \sigma ^2 \log \alpha}.
+\end{equation}
+
+
+In the image below we plot the values of \( \Delta  t\) for different values of \(\alpha\).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{plots/dt_vs_k.png} % Replace 'example-image' with the filename of your image
+    \caption{The plot of $\Delta t$ as a function of $\log \alpha$.}
+\end{figure}
+
+
+
+\section{exercise 3}
+\subsection{a}
+We want to show that $Z=x_0 e^{at}$ is an the solution to the differential equation $$\mathrm{d}Z(t)= a(Z(t))\mathrm{d}t, \quad Z(0)=x_0$$
+We use the $a(x)=ax$
+$$dZ(t)= a Z(t) dt $$
+$$\frac{dZ(t)}{Z(t)}=adt$$
+Integrating both sides gives $$\int_0^t\frac{1}{Z(u)}dZ_u= at+C$$
+$$ln(Z(t))=at+C$$
+$$Z(t)= C_{1}e^ {at}.$$
+Filling in the initial conditions gives $$Z(t)=x_0 e^{at}.$$
+
+On the other hand, the SDE \(dX_t = aX_t dt +bdW_t\) is the Ornstein-Uhlenbeck process. We know from the previous assignment that the solution to this SDE is given by the following equation (the proof will be omitted here).
+\begin{equation}
+    X_t = x_t e^{at} + \int_0^t b e^{a(t-s)}dW_s.
+\end{equation}
+
+We can then compute
+\begin{equation}
+    e_t \coloneqq X_t -Z_t = x_0 e^{at} + \int_0^t b e^{a(t-s)}dW_s - x_0 e^{at} = \int_0^t b e^{a(t-s)}dW_s.
+\end{equation}
+
+We note that \(e_t\) is a Martingale by the Ito integral w.r.t. a Martingale. Thus, \(\mathbb{E} \left[ e_t \right] = x_0=0\).
+We can also compute the variance as follows using the Ito isometry:
+\begin{align}
+    \Var\left[e_t \right] = b^2 \mathbb{E} \left[ \left( \int _0^t e^{-a(s-t)}dW_s \right)^{2}   \right] & = \mathbb{E} \left[ \int _0^t e^{-a(s-t)}ds \right] \\
+                                                                                                         & = \frac{e^{at} -1}{a}
+\end{align}
+
+
+
+\subsection{b}
+Let's first write \(X_t\) and \(Z_t\) in the integral form:
+\begin{equation}
+    Z_t = x_0 + \int_0^t a(Z_s)ds
+\end{equation}
+and
+\begin{equation}
+    X_t = x_0 + \int_0^t a(X_s)ds + \int_0^t b dW_s = x_0 + \int_0^t a(X_s)ds + bW_t.
+\end{equation}
+Thus
+\begin{equation}
+    e_t = X_t - Z_t = \int _0^t a(X_s)ds + bW_t - \int_0^t a(Z_s)ds = \int _0^t a(X_s)- a(Z_s)ds + bW_t.
+\end{equation}
+We compute now the expectation of \(e_t\) as follows
+\begin{align}
+    \mathbb{E} \left[ e_t^2 \right] & = \mathbb{E} \left[ \left( \int _0 a(X_s) - a(Z_s)ds \right)^{2}   \right] - 2b \mathbb{E} \left[ \left( \int _0^t  a(X_s) - a(Z_s)ds \right) W_t  \right] + \mathbb{E} \left[ b^{2} W_t^2  \right]
+\end{align}
+By independence of the Brownian motion the second term is 0.  Thus, by using triangle inequality twice we get
+\begin{align*}
+    \mathbb{E} \left[ e_t^2 \right] & =  b^2 t + \mathbb{E} \left[ \left( \int _0^t a(X_s) - a(Z_s) \right) ^{2}  \right]                      \\
+                                    & \leq b^2 t + \left| \mathbb{E} \left[ \left( \int _0^t a(X_s) - a(Z_s) ds\right)^{2}   \right]\right|    \\
+                                    & \leq  b^2 t + \mathbb{E} \left[ \left| \left( \int _0^t a(X_s) - a(Z_s)ds \right)^{2} \right|  \right]   \\
+                                    & \leq  b^2 t + \mathbb{E} \left[  \left( \int _0^t \left|a(X_s) - a(Z_s)\right| ds \right) ^{2} \right] .
+\end{align*}
+Using now the Lipschitz continuity of \(a\) we get
+\begin{align*}
+    b^2 t + \mathbb{E} \left[  \left( \int _0^t \left|a(X_s) - a(Z_s)\right| ds \right) ^{2} \right] & \leq  b^2 t+ \mathbb{E} \left[  \left( \int _0^t C_a \left|X_s - Z_s\right| ds \right)^{2}  \right] \\.
+\end{align*}
+By Jensen's inequality we get
+\begin{equation}
+    b^2t+ \mathbb{E} \left[  \left( \int _0^t C_a \left|X_s - Z_s\right| ds \right)^{2}  \right]  \leq b^2 t+ \mathbb{E} \left[  \left( \int _0^t C_{a} ^{2}  \left|X_s - Z_s\right|^{2}  ds \right)  \right].
+\end{equation}
+Assuming that \(\mathbb{E} \left[ |X_s - Z-s| \right] <\infty \) and using the fact that we are integrating over a positive function, we apply Fubini's theorem. Note that the expectation of \(Z_s\) is just \(Z_s\) as it's deterministic thus finite, and \(X_t\) has a similar form to the GBM which has a finite expectation. Thus we get
+\begin{equation}
+    b^2 t+ \mathbb{E} \left[  \left( \int _0^t C_{a} ^{2}  \left|X_s - Z_s\right|^{2}  ds \right)  \right] = b^2 t + \int _0^t C_a^2 \mathbb{E} \left[ |X_s - Z_s |^2\right]ds  = b^2 t + C_a^2 \int _0^t \mathbb{E} \left[ e_s^2 \right]ds.
+\end{equation}
+By applying the Gronwall's inequality we get
+\begin{equation}
+    \mathbb{E} \left[ e_t^2 \right]\leq b^2 t + C_a^2 \int _0^t \mathbb{E} \left[ e_s^2 \right]ds \leq b^2 t \exp \left( \int _0^t C_{a}^{2} ds  \right) =  b^2 t \exp \left(   C_a^2 t  \right).
+\end{equation}
+Using this, we can bound the variance of \(e_t\) as follows
+\begin{equation}
+    \Var\left[e_t \right] = \mathbb{E} \left[ e_t^2 \right] - \mathbb{E} \left[ e_t \right]^{2} \leq \mathbb{E} \left[ e_t^2 \right]\leq  b^2 t \exp \left(   C_a^2 t  \right).
+\end{equation}
+
+\subsection{C}
+In this section we take a look at the numeric results and compare it with the upper bound found in the previous point.
+
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_x_10_steps.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/variance_error_10_steps.png}
+    \end{minipage}
+
+    \vspace{0.5cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_x_20_steps.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/variance_error_20_steps.png}
+    \end{minipage}
+
+    \vspace{0.5cm}
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/forward_euler_x_40_steps.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/variance_error_40_steps.png}
+    \end{minipage}
+
+
+
+    \caption{Mean of the \(X_t\) process and the variance of the error \(e_t =X_t -Z_t\)  for 10, 20 and 40 steps.}
+\end{figure}
+
+
+As one can clearly note, the numerical variance of the error is well below the theoretical bound. Moreover, this difference increases exponentially as the variance of the numerics converges. The variance of the error is shown below.
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/variance_error_10_steps_only.png}
+    \end{minipage}
+    \hfill
+
+    \vspace{0.5cm}
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/variance_error_20_steps_only.png}
+    \end{minipage}
+    \hfill
+
+    \vspace{0.5cm}
+    \begin{minipage}{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{plots/variance_error_40_steps_only.png}
+    \end{minipage}
+    \hfill
+
+
+
+    \caption{Mean of the \(X_t\) process and the variance of the error \(e_t =X_t -Z_t\)  for 10, 20 and 40 steps.}
+\end{figure}
+
+\end{document}
