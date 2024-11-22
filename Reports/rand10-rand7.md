@@ -41,7 +41,7 @@ The code can be changed accordingly to (here we just produce new results instead
 ```
 
 def rand10(self):
-    s = sum([(rand7()-1)* (7**i) for i in range(1,20)])
+    s = sum([(rand7()-1)* (7**i) for i in range(19)])
 
     while s > 0:
         self.result.append(s % 10)
